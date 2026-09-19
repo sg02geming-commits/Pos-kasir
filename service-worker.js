@@ -7,9 +7,9 @@ const RUNTIME_CACHE = 'kasen-runtime-v1';
 // File yang di-cache saat install (app shell)
 const PRECACHE_URLS = [
   './',
-  './kasir.html',
+  './index.html',
   './manager.html',
-  './manifest-kasir.json',
+  './manifest.json',
   './manifest-manager.json',
   './icon-192.png',
   './icon-512.png',
@@ -73,7 +73,7 @@ self.addEventListener('fetch', event => {
           caches.open(RUNTIME_CACHE).then(cache => cache.put(req, clone));
           return res;
         })
-        .catch(() => caches.match(req).then(r => r || caches.match('./kasir.html')))
+        .catch(() => caches.match(req).then(r => r || caches.match('./index.html')))
     );
     return;
   }
