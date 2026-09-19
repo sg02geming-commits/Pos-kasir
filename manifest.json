@@ -44,7 +44,7 @@
       "name": "Kasir",
       "short_name": "Kasir",
       "description": "Langsung ke halaman kasir",
-      "url": "./kasir.html",
+      "url": "./index.html",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ],
