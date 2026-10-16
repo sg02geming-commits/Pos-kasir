@@ -5,17 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
 <title>Kasir Kasen</title>
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#000000">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#2563eb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Kasir Kasen">
-<link rel="apple-touch-icon" href="icon-192.png">
-
-  <style>
+<link rel="manifest" href="manifest-kasir.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700;800&family=Roboto:wght@400;500;700;900&family=Raleway:wght@400;600;700;800&family=Ubuntu:wght@400;500;700&family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
   :root {
     --primary:#2563eb; --primary-soft:#eff6ff;
     --success:#16a34a; --success-soft:#f0fdf4;
@@ -80,14 +74,7 @@
 
   .drawer-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:90; }
   .drawer-bg.active { display:block; }
-  .drawer {
-    position:fixed; top:0; right:0; bottom:0;
-    width:280px; max-width:82vw;
-    background:var(--card); border-left:1px solid var(--border);
-    transform:translateX(100%); transition:transform .25s ease;
-    z-index:91; display:flex; flex-direction:column;
-    overflow-y:auto; padding:16px;
-  }
+  .drawer { position:fixed; top:0; right:0; bottom:0; width:280px; max-width:82vw; background:var(--card); border-left:1px solid var(--border); transform:translateX(100%); transition:transform .25s ease; z-index:91; display:flex; flex-direction:column; overflow-y:auto; padding:16px; }
   .drawer-bg.active .drawer { transform:translateX(0); }
   .drawer-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
   .drawer-head h3 { margin:0; font-size:15px; }
@@ -207,6 +194,12 @@
   .summary-card .value { font-size:15px; font-weight:700; color:var(--text); margin-top:4px; word-break:break-all; }
   .summary-card .value.green { color:var(--success); }
   .summary-card .value.red { color:var(--danger); }
+
+  /* ✅ Grid 4 kolom untuk ringkasan riwayat */
+  .summary-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  @media (min-width: 600px) {
+    .summary-grid-4 { grid-template-columns: repeat(4, 1fr) !important; }
+  }
 
   .stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:12px; text-align:center; }
   .stat-card .label { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
@@ -553,7 +546,12 @@
         <button class="pin-key" data-d="0">0</button>
         <button class="pin-key action del" data-action="del">⌫</button>
       </div>
-      <div style="font-size:11px;color:var(--faint);margin-top:16px;">Lupa PIN? Hubungi pemilik.</div>
+      <!-- ✅ Opsi login cepat tanpa PIN -->
+      <div style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--bg);border-radius:var(--radius);">
+        <input type="checkbox" id="chkQuickLogin" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
+        <label for="chkQuickLogin" style="font-size:12px;color:var(--text);cursor:pointer;font-weight:600;">⚡ Login cepat (tidak perlu PIN)</label>
+      </div>
+      <div style="font-size:11px;color:var(--faint);margin-top:12px;">Lupa PIN? Hubungi pemilik.</div>
     </div>
   </div>
 </div>
@@ -707,9 +705,12 @@
       <button class="btn" data-filter="month">Bulan Ini</button>
       <button class="btn" data-filter="all">Semua</button>
     </div>
-    <div class="summary-grid">
+    <!-- ✅ 4 kartu ringkasan: Jumlah Trx • Tunai • Non Tunai • Total -->
+    <div class="summary-grid summary-grid-4">
       <div class="summary-card"><div class="label">Jumlah Trx</div><div class="value" id="sumTrxCount">0</div></div>
-      <div class="summary-card"><div class="label">Total</div><div class="value green" id="sumTrxTotal">Rp 0</div></div>
+      <div class="summary-card"><div class="label">💵 Tunai</div><div class="value" id="sumTrxTunai">Rp 0</div></div>
+      <div class="summary-card"><div class="label">💳 Non Tunai</div><div class="value" id="sumTrxNonTunai">Rp 0</div></div>
+      <div class="summary-card"><div class="label">💰 Total</div><div class="value green" id="sumTrxTotal">Rp 0</div></div>
     </div>
     <div id="trxList"></div>
   </div>
@@ -727,7 +728,7 @@
       <label>📅 Pilih Sesi</label>
       <select id="rekapSessionSelect"></select>
       <div style="font-size:11px;color:var(--muted);margin-top:6px;">
-        💡 Default <b>Sesi Aktif</b>. Setelah tutup toko, sesi aktif = kosong. Data lama tetap tersimpan di arsip — pilih di dropdown ini.
+        💡 Default <b>Sesi Aktif</b>. Setelah tutup toko, sesi aktif = kosong. Data lama tetap tersimpan di arsip.
       </div>
     </div>
     <div id="sessionInfoBanner"></div>
@@ -958,7 +959,7 @@
   <h3>⚠️ Konfirmasi Tutup Toko</h3>
   <div style="background:var(--warning-soft);border-radius:var(--radius);padding:12px;margin-bottom:12px;font-size:12px;line-height:1.5;">
     <b style="color:var(--danger);display:block;margin-bottom:4px;">Tutup Toko hanya bisa 1 kali per sesi!</b>
-    Setelah tutup toko, semua transaksi sesi ini akan <b>dipindah ke Arsip Sesi</b> & <b>terkirim ke cloud</b>. Tampilan real-time akan kosong.
+    Setelah tutup toko, semua transaksi sesi ini akan <b>dipindah ke Arsip Sesi</b> & <b>terkirim ke cloud</b>.
   </div>
   <div id="closingConfirmSummary" class="pay-summary" style="margin-bottom:0;"></div>
   <div class="modal-actions">
@@ -1065,12 +1066,10 @@
       <span id="cloudLastSync" style="font-weight:700;">-</span>
     </div>
   </div>
-
   <div id="cloudListBox" style="margin-top:8px;">
     <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:8px;">📤 Riwayat Upload Terakhir</div>
     <div id="cloudUploadList"></div>
   </div>
-
   <div class="modal-actions">
     <button class="btn btn-ghost" id="btnCloseCloud">Tutup</button>
     <button class="btn btn-primary" id="btnForceSyncCloud">🔄 Sync Sekarang</button>
@@ -1109,30 +1108,18 @@
       <select id="selFontFamily">
         <option value="system">System Default</option>
         <optgroup label="Sans Serif">
-          <option value="inter">Inter</option>
-          <option value="poppins">Poppins</option>
-          <option value="montserrat">Montserrat</option>
-          <option value="nunito">Nunito</option>
-          <option value="lato">Lato</option>
-          <option value="opensans">Open Sans</option>
-          <option value="roboto">Roboto</option>
-          <option value="raleway">Raleway</option>
-          <option value="ubuntu">Ubuntu</option>
-          <option value="arial">Arial</option>
-          <option value="helvetica">Helvetica</option>
-          <option value="verdana">Verdana</option>
-          <option value="trebuchet">Trebuchet MS</option>
-          <option value="tahoma">Tahoma</option>
+          <option value="inter">Inter</option><option value="poppins">Poppins</option><option value="montserrat">Montserrat</option>
+          <option value="nunito">Nunito</option><option value="lato">Lato</option><option value="opensans">Open Sans</option>
+          <option value="roboto">Roboto</option><option value="raleway">Raleway</option><option value="ubuntu">Ubuntu</option>
+          <option value="arial">Arial</option><option value="helvetica">Helvetica</option><option value="verdana">Verdana</option>
+          <option value="trebuchet">Trebuchet MS</option><option value="tahoma">Tahoma</option>
         </optgroup>
         <optgroup label="Serif">
-          <option value="georgia">Georgia</option>
-          <option value="times">Times New Roman</option>
-          <option value="playfair">Playfair Display</option>
-          <option value="merriweather">Merriweather</option>
+          <option value="georgia">Georgia</option><option value="times">Times New Roman</option>
+          <option value="playfair">Playfair Display</option><option value="merriweather">Merriweather</option>
         </optgroup>
         <optgroup label="Monospace">
-          <option value="jetbrains">JetBrains Mono</option>
-          <option value="courier">Courier New</option>
+          <option value="jetbrains">JetBrains Mono</option><option value="courier">Courier New</option>
         </optgroup>
       </select>
     </div>
@@ -1261,10 +1248,12 @@ var PRESETS = [
 ];
 
 var ROLE_LABEL = {
-  owner:'Pemilik',
-  kasir:'Kasir',
-  crew:'Crew (Terbatas)',
-  leader:'Leader / SPV'
+  crew:'Crew',
+  leader:'Leader / SPV',
+  kasir:'Crew',
+  owner:'Leader / SPV',
+  manager:'Leader / SPV',
+  supervisor:'Leader / SPV'
 };
 var SYNC_CONFIG = { autoSyncThreshold: 80, warnThreshold: 70 };
 
@@ -1384,10 +1373,10 @@ function updatePaymentModeUI() {
 // ============================================================
 function getUserRole() {
   if (!currentUser) return 'crew';
-  var r = currentUser.role || 'crew';
-  if (r === 'kasir') return 'crew';
-  if (r === 'owner') return 'leader';
-  return r;
+  var r = String(currentUser.role || 'crew').toLowerCase().trim();
+  if (r === 'leader' || r === 'owner' || r === 'manager' || r === 'supervisor' || r === 'spv') return 'leader';
+  if (r === 'crew' || r === 'kasir' || r === 'cashier') return 'crew';
+  return 'crew';
 }
 function isLeader() { return getUserRole() === 'leader'; }
 function isCrew() { return getUserRole() === 'crew'; }
@@ -1538,7 +1527,7 @@ function buildClosingPayload(archivedEntry, closingData) {
     timestamp: closingData.timestamp,
     uploadedAt: firebase.firestore.FieldValue.serverTimestamp(),
     uploadedAtMs: tsUpload.getTime(),
-    appVersion: 'v29.0-cloud'
+    appVersion: 'v30.0-cloud'
   };
 }
 
@@ -1553,13 +1542,11 @@ function uploadClosingToCloud(archivedEntry, closingData) {
     .then(function() {
       localStorage.setItem(CLOUD_LAST_SYNC_KEY, String(Date.now()));
       updateCloudIndicator('synced');
-      console.log('☁️ Upload sukses:', closingData.id);
       log('☁️ Data terkirim ke cloud (' + closingData.id + ')');
       toast('☁️ Data terkirim ke cloud', 'success');
       return { success: true };
     })
     .catch(function(err) {
-      console.error('Upload gagal:', err);
       queuePendingUpload(archivedEntry, closingData);
       updateCloudIndicator('error');
       log('⚠️ Gagal kirim cloud: ' + err.message);
@@ -2138,6 +2125,15 @@ function pinError() {
 function doLoginSuccessFor(user) {
   currentUser = user;
   sessionStorage.setItem('kasen_session_uid', currentUser.id);
+
+  // ✅ Simpan flag login cepat
+  var quickLoginChk = $('chkQuickLogin');
+  if (quickLoginChk && quickLoginChk.checked) {
+    localStorage.setItem('kasen_quick_login_uid', currentUser.id);
+  } else {
+    localStorage.removeItem('kasen_quick_login_uid');
+  }
+
   loginPinBuffer = '';
   loadUserData();
   hideLoginScreen(); renderAll();
@@ -2145,7 +2141,7 @@ function doLoginSuccessFor(user) {
   applyRoleUI();
   log('Login: ' + currentUser.nama + ' (' + (ROLE_LABEL[getUserRole()] || '-') + ')');
   toast('Selamat datang, ' + currentUser.nama + '!', 'success');
-  setTimeout(function() { tryAutoReconnect(); }, 4000);
+  setTimeout(function() { tryAutoReconnect(); }, 1000);
   setTimeout(function() { checkAndStartSession(); }, 800);
 }
 function logout() {
@@ -2159,6 +2155,7 @@ function doLogoutConfirmed() {
   if (!currentUser) return;
   log('Logout: ' + currentUser.nama);
   sessionStorage.removeItem('kasen_session_uid');
+  localStorage.removeItem('kasen_quick_login_uid');
   resetSessionState();
   currentUser = null;
   updateDrawerUser();
@@ -2525,11 +2522,16 @@ function updateStatus(on) {
   $('statusDot').classList.toggle('connected', on);
   $('statusText').textContent = on ? 'Printer terhubung' : 'Printer belum terhubung';
 }
+
+// ✅ AUTO-RECONNECT dengan lock agar tidak overlap
+var _autoReconnectLock = false;
 async function tryAutoReconnect() {
+  if (_autoReconnectLock) return;
   if (!navigator.bluetooth || !navigator.bluetooth.getDevices) return;
   if (isConnected) return;
   pairedDevices = loadPairedDevices();
   if (pairedDevices.length === 0) return;
+  _autoReconnectLock = true;
   try {
     var known = await navigator.bluetooth.getDevices();
     if (known.length === 0) return;
@@ -2538,11 +2540,21 @@ async function tryAutoReconnect() {
       var pd = sorted[i];
       var found = known.find(function(d) { return d.id === pd.id; });
       if (found) {
-        try { device = found; await connectToGatt(device); return; }
-        catch (e) {}
+        try {
+          device = found;
+          await connectToGatt(device);
+          log('🖨️ Auto-connect: ' + (device.name || 'Printer'));
+          return;
+        } catch (e) {
+          console.warn('Auto-connect gagal untuk ' + pd.name + ':', e.message);
+        }
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    console.warn('Auto-reconnect error:', e.message);
+  } finally {
+    _autoReconnectLock = false;
+  }
 }
 
 // ============================================================
@@ -3098,7 +3110,6 @@ async function doClosingProcess() {
   ARCHIVE_SESSIONS.unshift(archivedEntry);
   saveArchiveSessions();
 
-  // ☁️ Kirim ke cloud
   uploadClosingToCloud(archivedEntry, closingSnapshot);
 
   TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.sessionId !== closedSessionId; });
@@ -3261,7 +3272,14 @@ function renderTransactions() {
   var list = filterTransactions(all, currentTrxFilter);
   list.sort(function(a, b) { return b.timestamp - a.timestamp; });
   $('sumTrxCount').textContent = list.length;
-  $('sumTrxTotal').textContent = fmtRp(list.reduce(function(s,t) { return s+t.total; }, 0));
+  // ✅ Hitung tunai & non tunai terpisah
+  var sumTunai = list.filter(function(t) { return t.paymentMode !== 'nontunai'; })
+    .reduce(function(s, t) { return s + t.total; }, 0);
+  var sumNonTunai = list.filter(function(t) { return t.paymentMode === 'nontunai'; })
+    .reduce(function(s, t) { return s + t.total; }, 0);
+  $('sumTrxTunai').textContent = fmtRp(sumTunai);
+  $('sumTrxNonTunai').textContent = fmtRp(sumNonTunai);
+  $('sumTrxTotal').textContent = fmtRp(sumTunai + sumNonTunai);
   var c = $('trxList');
   if (list.length === 0) {
     var emptyMsg = trxSessionFilter === '__active__' && !currentSessionId
@@ -3481,9 +3499,14 @@ function renderRekap() {
   list.forEach(function(t) { (t.items || []).forEach(function(it) { totalQty += it.qty; }); });
   var latestSesi = sesiRange.slice().sort(function(a, b) { return (b.timestampMulai || 0) - (a.timestampMulai || 0); })[0];
   var totalModalAwal = latestSesi ? (latestSesi.modalAwal || 0) : 0;
+  // ✅ Hitung tunai & non tunai terpisah
   var totalTunai = list.filter(function(t) { return t.paymentMode === 'tunai' || !t.paymentMode; })
     .reduce(function(s, t) { return s + t.total; }, 0);
-  var kasAkhir = totalModalAwal + totalTunai;
+  var totalNonTunai = list.filter(function(t) { return t.paymentMode === 'nontunai'; })
+    .reduce(function(s, t) { return s + t.total; }, 0);
+  // ✅ Kas Akhir Kasir = Modal Awal + Pembayaran Tunai − Pengeluaran
+  var kasAkhir = totalModalAwal + totalTunai - totalPengeluaran;
+
   var hero = $('rekapHero');
   hero.innerHTML = '' +
     '<div class="rekap-hero">' +
@@ -3498,6 +3521,7 @@ function renderRekap() {
         '<div class="rh-item"><div class="l">Qty</div><div class="v">' + totalQty + '</div></div>' +
       '</div>' +
     '</div>';
+
   var financeHtml = '' +
     '<div class="finance-grid">' +
       '<div class="finance-card">' +
@@ -3522,11 +3546,13 @@ function renderRekap() {
         '<div class="fc-icon">🏦</div>' +
         '<div class="fc-label">Kas Akhir Kasir</div>' +
         '<div class="fc-value">' + fmtRp(kasAkhir) + '</div>' +
-        '<div class="fc-sub">Modal + Tunai</div>' +
+        '<div class="fc-sub">Modal + Tunai − Keluar</div>' +
       '</div>' +
     '</div>';
+
   var content = $('rekapContent');
   var html = '';
+
   var perPlatform = {};
   list.forEach(function(t) {
     var key = t.txMode || 'Takeaway';
@@ -3557,6 +3583,7 @@ function renderRekap() {
     });
   }
   html += '</div>';
+
   var perKasir = {};
   list.forEach(function(t) {
     var k = t.kasir || 'Tanpa Nama';
@@ -3583,6 +3610,7 @@ function renderRekap() {
     });
     html += '</div>';
   }
+
   var perMetode = {};
   list.forEach(function(t) {
     var key = t.metode || 'Tunai';
@@ -3608,6 +3636,7 @@ function renderRekap() {
     });
   }
   html += '</div>';
+
   var perProduk = {};
   list.forEach(function(t) {
     (t.items || []).forEach(function(it) {
@@ -3630,6 +3659,7 @@ function renderRekap() {
     });
   }
   html += '</div>';
+
   var perJam = new Array(24).fill(0);
   list.forEach(function(t) { var h = new Date(t.timestamp).getHours(); perJam[h]++; });
   var maxPair = 0, maxPairIdx = 0;
@@ -3650,6 +3680,7 @@ function renderRekap() {
     html += '<div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;">🔥 Jam terpadat: <b style="color:var(--warning);">' + String(jamPadat).padStart(2,'0') + ':00</b> • ' + perJam[jamPadat] + ' transaksi</div>';
   }
   html += '</div>';
+
   html += '<div class="rekap-block"><h3>🌅 Sesi Kasir (' + sesiRange.length + ')</h3>';
   if (sesiRange.length === 0) html += '<div style="text-align:center;color:var(--muted);font-size:12px;padding:12px;">Belum ada sesi</div>';
   else {
@@ -3665,14 +3696,18 @@ function renderRekap() {
     });
   }
   html += '</div>';
+
+  // ✅ Ringkasan Keuangan: Modal Awal + Penjualan Kotor − Pengeluaran = Penjualan Bersih
+  var penjualanBersihBaru = totalModalAwal + totalKotor - totalPengeluaran;
   html += '<div class="rekap-block"><h3>💰 Ringkasan Keuangan</h3>';
   html += '<div class="rekap-row"><div class="rk-info"><div class="rk-nama">💼 Modal Awal</div></div><div class="rk-val">' + fmtRp(totalModalAwal) + '</div></div>';
   html += '<div class="rekap-row"><div class="rk-info"><div class="rk-nama">💵 Penjualan Kotor</div></div><div class="rk-val">' + fmtRp(totalKotor) + '</div></div>';
   html += '<div class="rekap-row"><div class="rk-info"><div class="rk-nama">💸 Pengeluaran</div></div><div class="rk-val" style="color:var(--danger);">-' + fmtRp(totalPengeluaran) + '</div></div>';
-  html += '<div class="rekap-row" style="border-top:2px solid var(--border);padding-top:12px;"><div class="rk-info"><div class="rk-nama" style="font-size:14px;">💎 Penjualan Bersih</div></div><div class="rk-val" style="font-size:15px;color:var(--success);">' + fmtRp(bersih) + '</div></div>';
-  html += '<div class="rekap-row" style="border-top:2px solid var(--border);padding-top:12px;"><div class="rk-info"><div class="rk-nama" style="font-size:14px;">🏦 Kas Akhir Kasir</div></div><div class="rk-val" style="font-size:15px;color:var(--primary);">' + fmtRp(kasAkhir) + '</div></div>';
+  html += '<div class="rekap-row" style="border-top:2px solid var(--border);padding-top:12px;"><div class="rk-info"><div class="rk-nama" style="font-size:14px;">💎 Penjualan Bersih</div></div><div class="rk-val" style="font-size:15px;color:var(--success);">' + fmtRp(penjualanBersihBaru) + '</div></div>';
   html += '</div>';
+
   content.innerHTML = financeHtml + html;
+
   renderTrenChart();
 }
 
@@ -4079,7 +4114,6 @@ document.querySelectorAll('.drawer-tab').forEach(function(btn) {
   });
 });
 
-// Cloud indicator click → buka cloud modal
 safeAdd('cloudIndicator', 'click', function() {
   if (!isLeader()) { toast('Cloud info hanya untuk Leader', 'error'); return; }
   renderCloudModal();
@@ -4157,7 +4191,7 @@ safeAdd('menuBackup', 'click', function() {
   toast('Backup diunduh', 'success');
 });
 safeAdd('menuAbout', 'click', function() {
-  alert(appSettings.appName + ' v29.0\n\nFitur:\n+ ☁️ Cloud Sync (Firebase)\n+ Role: Crew / Leader\n+ Data device-wide\n+ Rekap Leader-only\n+ Drawer menu\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
+  alert(appSettings.appName + ' v30.0\n\nFitur:\n+ Auto-reconnect printer\n+ Kartu tunai/non-tunai di riwayat\n+ Login cepat (tanpa PIN)\n+ Ringkasan keuangan baru\n+ ☁️ Cloud Sync (Firebase)\n+ Role: Crew / Leader\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
     '\nRole: ' + (ROLE_LABEL[getUserRole()] || '-') +
     '\nDevice ID: ' + getDeviceId() +
     '\nPending upload: ' + getPendingCount());
@@ -4622,7 +4656,12 @@ window.addEventListener('offline', function() {
   updateCloudIndicator('offline');
 });
 
+// ✅ Cek auto-login quick login
 var sessionUid = sessionStorage.getItem('kasen_session_uid');
+if (!sessionUid) {
+  var quickUid = localStorage.getItem('kasen_quick_login_uid');
+  if (quickUid) sessionUid = quickUid;
+}
 if (sessionUid) {
   var u = USERS.find(function(x) { return x.id === sessionUid; });
   if (u) currentUser = u;
@@ -4633,7 +4672,19 @@ if (currentUser) {
   updatePaymentModeUI();
   applyRoleUI();
   log('Login: ' + currentUser.nama + ' (' + (ROLE_LABEL[getUserRole()] || '-') + ')');
-  setTimeout(function() { tryAutoReconnect(); }, 4000);
+  // ✅ AUTO-RECONNECT: coba connect langsung + periodic retry
+  setTimeout(function() { tryAutoReconnect(); }, 1000);
+  setInterval(function() {
+    if (!isConnected && pairedDevices.length > 0) tryAutoReconnect();
+  }, 15000);
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden && !isConnected && pairedDevices.length > 0) {
+      tryAutoReconnect();
+    }
+  });
+  window.addEventListener('focus', function() {
+    if (!isConnected && pairedDevices.length > 0) tryAutoReconnect();
+  });
   setTimeout(function() { checkAndStartSession(); }, 1000);
 } else {
   showLoginScreen();
