@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
   <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#000000">
 <meta charset="UTF-8">
@@ -11,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Kasir Kasen">
 <link rel="apple-touch-icon" href="icon-192.png">
-  
+
 <style>
   :root {
     --primary:#2563eb; --primary-soft:#eff6ff;
@@ -69,6 +68,56 @@
   h2 { font-size:var(--font-size-h2); }
   h3 { font-size:var(--font-size-h3); margin-bottom:14px; }
   h4 { font-size:var(--font-size-small); color:var(--muted); text-transform:uppercase; letter-spacing:.6px; margin:16px 0 8px; font-weight:600; }
+
+  /* ✅ CUSTOM DROPDOWN STYLING GLOBAL */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 36px 10px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    width: 100%;
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+  }
+  select:hover {
+    border-color: var(--primary);
+    background-color: var(--primary-soft);
+    transform: translateY(-1px);
+  }
+  body.dark select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+  body.dark select:hover {
+    background-color: rgba(96,165,250,.15);
+  }
+
+  /* ✅ CUSTOM MODAL STYLING */
+  .custom-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1000; align-items:center; justify-content:center; padding:16px; backdrop-filter: blur(3px); }
+  .custom-modal-overlay.active { display:flex; }
+  .custom-modal-content { background:var(--card); border-radius:20px; width:100%; max-width:380px; padding:24px; box-shadow:0 25px 50px -12px rgba(0,0,0,.4); text-align:center; border:1px solid var(--border); animation: modalPop .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  @keyframes modalPop { 0% { transform:scale(.85); opacity:0; } 100% { transform:scale(1); opacity:1; } }
+  .custom-modal-icon { font-size:48px; margin-bottom:12px; line-height: 1; }
+  .custom-modal-title { font-size:18px; font-weight:800; margin-bottom:8px; color:var(--text); letter-spacing: -.5px; }
+  .custom-modal-msg { font-size:13px; color:var(--muted); margin-bottom:24px; line-height:1.6; white-space: pre-wrap; }
+  .custom-modal-actions { display:flex; gap:10px; justify-content:center; }
+  .custom-modal-actions .btn { flex:1; padding:12px; font-size:14px; border-radius:10px; }
 
   .header { display:flex; align-items:center; gap:8px; padding:10px 14px; margin-bottom:14px; background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); }
   .header h1 { flex:1; font-size:var(--font-size-h1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -168,8 +217,8 @@
 
   .form-group { margin-bottom:12px; }
   .form-group label { display:block; font-size:12px; color:var(--muted); margin-bottom:6px; font-weight:600; }
-  .form-group input, .form-group textarea, .form-group select { width:100%; padding:10px 12px; font-size:14px; border:1px solid var(--border); border-radius:var(--radius); font-family:inherit; background:var(--card); color:var(--text); }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--primary); }
+  .form-group input, .form-group textarea { width:100%; padding:10px 12px; font-size:14px; border:1px solid var(--border); border-radius:var(--radius); font-family:inherit; background:var(--card); color:var(--text); }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--primary); }
   .form-group textarea { resize:vertical; min-height:70px; }
 
   .row { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border-soft); }
@@ -198,7 +247,6 @@
   .summary-card .value.green { color:var(--success); }
   .summary-card .value.red { color:var(--danger); }
 
-  /* ✅ Grid 4 kolom untuk ringkasan riwayat */
   .summary-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
   @media (min-width: 600px) {
     .summary-grid-4 { grid-template-columns: repeat(4, 1fr) !important; }
@@ -319,11 +367,11 @@
   .pin-key.action.cancel { color:var(--muted); font-size:12px; }
   .login-error { color:var(--danger); font-size:12px; font-weight:600; min-height:18px; margin-bottom:6px; }
 
-  .session-bar { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:14px; background:linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); border-radius:var(--radius-lg); color:#fff; font-size:12px; }
-  .session-bar .sb-icon { font-size:20px; }
+  .session-bar { display:flex; align-items:center; gap:8px; padding:8px 12px; margin-bottom:12px; background:linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); border-radius:var(--radius); color:#fff; font-size:11px; }
+  .session-bar .sb-icon { font-size:16px; }
   .session-bar .sb-info { flex:1; min-width:0; }
-  .session-bar .sb-title { font-weight:800; font-size:13px; }
-  .session-bar .sb-sub { opacity:.85; font-size:11px; margin-top:2px; }
+  .session-bar .sb-title { font-weight:800; font-size:12px; }
+  .session-bar .sb-sub { opacity:.85; font-size:10px; margin-top:1px; }
 
   .rekap-hero { padding:18px; border-radius:var(--radius-lg); background:linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); color:#fff; margin-bottom:14px; }
   .rekap-hero .rh-label { font-size:11px; opacity:.8; text-transform:uppercase; letter-spacing:.8px; font-weight:700; }
@@ -526,6 +574,123 @@
   /* CLOUD INDICATOR */
   #cloudIndicator { cursor: pointer !important; }
   #cloudIndicator:active { background: var(--bg); }
+
+  /* ============================================================
+   ✅ CUSTOM DROPDOWN (Ganti Select Native)
+   ============================================================ */
+.custom-dd {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+}
+.custom-dd-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+}
+.custom-dd-trigger:hover {
+  border-color: var(--primary);
+  background-color: var(--primary-soft);
+}
+.custom-dd-trigger.open {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-soft);
+}
+.custom-dd-trigger .dd-arrow {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--muted);
+  transition: transform .2s;
+}
+.custom-dd-trigger.open .dd-arrow { transform: rotate(180deg); }
+.custom-dd-trigger .dd-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-dd-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 15px 35px -5px rgba(0,0,0,.25);
+  z-index: 300;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 6px;
+  display: none;
+  animation: ddSlide .18s ease;
+}
+.custom-dd-menu.show { display: block; }
+@keyframes ddSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.custom-dd-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color .12s, color .12s;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.custom-dd-item:hover {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+}
+.custom-dd-item.selected {
+  background-color: var(--primary);
+  color: #fff;
+  font-weight: 700;
+}
+.custom-dd-item.selected:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+.custom-dd-item .dd-check {
+  margin-left: auto;
+  font-size: 14px;
+  opacity: 0;
+}
+.custom-dd-item.selected .dd-check { opacity: 1; }
+
+.custom-dd-group {
+  padding: 8px 10px 4px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--muted);
+}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -777,7 +942,10 @@
 
 <!-- TAB TOKO -->
 <div class="tab-content" id="tab-toko">
+  <div id="tokoFinanceGrid"></div>
   <div id="tutupTokoSection"></div>
+  
+  <!-- Info Toko (Leader only) -->
   <div class="card" data-role-lock="leader">
     <div class="card-header"><h2>🏪 Info Toko</h2></div>
     <div class="form-group"><label>Nama Toko</label><input type="text" id="inpNamaToko"></div>
@@ -790,7 +958,9 @@
     <div class="form-group"><label>💵 Modal Awal Harian (Rp)</label><input type="text" id="inpModalDefault" inputmode="numeric" placeholder="100000"></div>
     <button class="btn btn-success btn-block" style="padding:12px;" id="btnSaveToko">💾 Simpan</button>
   </div>
-  <div class="card" data-role-lock="leader">
+
+  <!-- Pengeluaran (Bisa diakses Crew) -->
+  <div class="card">
     <div class="card-header"><h2>💸 Pengeluaran</h2><button class="btn btn-primary btn-sm" id="btnAddExpense">+ Tambah</button></div>
     <div class="form-group"><label>Filter Bulan</label><input type="month" id="filterBulanExpense"></div>
     <div class="summary-grid">
@@ -826,9 +996,49 @@
   </div>
 </div></div>
 
+<!-- MODAL PRINTER SETTINGS -->
+<div class="modal-bg" id="printerSettingsModal"><div class="modal">
+  <h3>🖨️ Pengaturan Printer</h3>
+  <div class="form-group">
+    <label>Jenis Printer</label>
+    <select id="selPrinterType">
+      <option value="Thermal">Thermal Printer</option>
+      <option value="Dot Matrix">Dot Matrix</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Mode Printer</label>
+    <select id="selPrinterMode">
+      <option value="Standard Printing">Standard Printing</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Koneksi Printer</label>
+    <select id="selPrinterConn">
+      <option value="Bluetooth">Bluetooth</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Nama Printer</label>
+    <input type="text" id="inpPrinterName" placeholder="RPP02N">
+  </div>
+  <div class="form-group">
+    <label>Chars. per line</label>
+    <input type="number" id="inpPrinterChars" value="32">
+  </div>
+  <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+    <input type="checkbox" id="chkAutoCut" style="width:18px;height:18px;">
+    <label for="chkAutoCut" style="margin:0;cursor:pointer;">Mode Potong Otomatis</label>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-ghost" id="btnCancelPrinterSettings">Kembali</button>
+    <button class="btn btn-warning" id="btnSavePrinterSettings">Simpan</button>
+  </div>
+</div></div>
+
 <!-- MODAL BT -->
 <div class="modal-bg" id="btModal"><div class="modal" style="max-width:440px;">
-  <h3>📡 Printer Bluetooth</h3>
+  <h3>📡 Pilih Printer Fisik</h3>
   <div id="btStatusCard" style="padding:14px;border-radius:12px;background:var(--bg);margin-bottom:14px;">
     <div style="display:flex;align-items:center;gap:10px;">
       <div id="btStatusIcon" style="width:44px;height:44px;border-radius:12px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📡</div>
@@ -1008,13 +1218,41 @@
 <div class="modal-bg" id="settingsModal"><div class="modal">
   <h3>⚙️ Pengaturan</h3>
   <div class="menu-list">
-    <button class="menu-item" id="menuCloudSync" data-role-lock="leader"><div class="menu-icon">☁️</div><div class="menu-info"><div class="menu-title">Sinkronisasi Cloud</div><div class="menu-desc">Kirim data tutup toko ke Firebase</div></div></button>
-    <button class="menu-item" id="menuSync" data-role-lock="leader"><div class="menu-icon">🔄</div><div class="menu-info"><div class="menu-title">Sinkronisasi Lokal</div><div class="menu-desc">Arsip sesi, storage & cleanup</div></div></button>
-    <button class="menu-item" id="menuEditApp" data-role-lock="leader"><div class="menu-icon">🎨</div><div class="menu-info"><div class="menu-title">Edit Aplikasi</div><div class="menu-desc">Warna, font, tema & nama</div></div></button>
-    <button class="menu-item" id="menuBackup" data-role-lock="leader"><div class="menu-icon">💾</div><div class="menu-info"><div class="menu-title">Backup Data</div><div class="menu-desc">Export JSON device ini</div></div></button>
-    <button class="menu-item" id="menuAbout"><div class="menu-icon">ℹ️</div><div class="menu-info"><div class="menu-title">Tentang</div><div class="menu-desc">Versi & info</div></div></button>
-    <button class="menu-item" id="menuLogout" style="background:var(--warning-soft);"><div class="menu-icon">🚪</div><div class="menu-info"><div class="menu-title">Logout</div><div class="menu-desc">Keluar dari akun ini</div></div></button>
-    <button class="menu-item danger" id="menuReset" data-role-lock="leader"><div class="menu-icon">🗑️</div><div class="menu-info"><div class="menu-title">Reset Data</div><div class="menu-desc">Hapus semua data device ini</div></div></button>
+    <button class="menu-item" id="menuPrinterSettings">
+      <div class="menu-icon">🖨️</div>
+      <div class="menu-info">
+        <div class="menu-title">Pengaturan Printer</div>
+        <div class="menu-desc">Konfigurasi tipe, koneksi & nama printer</div>
+      </div>
+    </button>
+    <button class="menu-item" id="menuCloudSync" data-role-lock="leader">
+      <div class="menu-icon">☁️</div>
+      <div class="menu-info"><div class="menu-title">Sinkronisasi Cloud</div><div class="menu-desc">Kirim data tutup toko ke Firebase</div></div>
+    </button>
+    <button class="menu-item" id="menuSync" data-role-lock="leader">
+      <div class="menu-icon">🔄</div>
+      <div class="menu-info"><div class="menu-title">Sinkronisasi Lokal</div><div class="menu-desc">Arsip sesi, storage & cleanup</div></div>
+    </button>
+    <button class="menu-item" id="menuEditApp">
+      <div class="menu-icon">🎨</div>
+      <div class="menu-info"><div class="menu-title">Edit Aplikasi</div><div class="menu-desc">Warna, font, tema & nama</div></div>
+    </button>
+    <button class="menu-item" id="menuBackup" data-role-lock="leader">
+      <div class="menu-icon">💾</div>
+      <div class="menu-info"><div class="menu-title">Backup Data</div><div class="menu-desc">Export JSON device ini</div></div>
+    </button>
+    <button class="menu-item" id="menuAbout">
+      <div class="menu-icon">ℹ️</div>
+      <div class="menu-info"><div class="menu-title">Tentang</div><div class="menu-desc">Versi & info</div></div>
+    </button>
+    <button class="menu-item" id="menuLogout" style="background:var(--warning-soft);">
+      <div class="menu-icon">🚪</div>
+      <div class="menu-info"><div class="menu-title">Logout</div><div class="menu-desc">Keluar dari akun ini</div></div>
+    </button>
+    <button class="menu-item danger" id="menuReset" data-role-lock="leader">
+      <div class="menu-icon">🗑️</div>
+      <div class="menu-info"><div class="menu-title">Reset Data</div><div class="menu-desc">Hapus semua data device ini</div></div>
+    </button>
   </div>
   <div class="modal-actions"><button class="btn btn-ghost" id="btnCloseSettings">Tutup</button></div>
 </div></div>
@@ -1167,6 +1405,18 @@
   </div>
 </div></div>
 
+<!-- ✅ CUSTOM MODAL (Pengganti Alert/Confirm) -->
+<div class="custom-modal-overlay" id="customModal">
+  <div class="custom-modal-content">
+    <div class="custom-modal-icon" id="customModalIcon">⚠️</div>
+    <div class="custom-modal-title" id="customModalTitle">Konfirmasi</div>
+    <div class="custom-modal-msg" id="customModalMsg">Apakah Anda yakin?</div>
+    <div class="custom-modal-actions" id="customModalActions">
+       <!-- Buttons injected by JS -->
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1174,6 +1424,7 @@
 // KONFIG
 // ============================================================
 var DEFAULT_TOKO = { nama:'TOKO KASEN', alamat:'Jl. Merdeka No. 123', telp:'0812-3456-7890', footer:'~ Terima Kasih ~', modalDefault:100000 };
+var DEFAULT_PRINTER_CONFIG = { type:'Thermal', mode:'Standard', conn:'Bluetooth', name:'', chars:32, autoCut:false };
 
 var DEFAULT_PLATFORMS = [
   { id:'Takeaway',   icon:'🥡', nama:'Takeaway' },
@@ -1261,11 +1512,134 @@ var ROLE_LABEL = {
 var SYNC_CONFIG = { autoSyncThreshold: 80, warnThreshold: 70 };
 
 // ============================================================
+// CUSTOM DROPDOWN COMPONENT
+// ============================================================
+function initCustomDropdown(nativeSelect) {
+  if (!nativeSelect || nativeSelect._isCustomDD) return;
+  nativeSelect._isCustomDD = true;
+
+  // Sembunyikan select asli
+  nativeSelect.style.display = 'none';
+
+  // Buat wrapper
+  var wrap = document.createElement('div');
+  wrap.className = 'custom-dd';
+  wrap.style.marginBottom = '0';
+
+  // Trigger button
+  var trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'custom-dd-trigger';
+  trigger.innerHTML = '<span class="dd-text"></span><span class="dd-arrow">▼</span>';
+
+  // Menu
+  var menu = document.createElement('div');
+  menu.className = 'custom-dd-menu';
+
+  wrap.appendChild(trigger);
+  wrap.appendChild(menu);
+  nativeSelect.parentNode.insertBefore(wrap, nativeSelect.nextSibling);
+
+  var currentValue = nativeSelect.value;
+
+  function renderMenu() {
+    menu.innerHTML = '';
+    Array.from(nativeSelect.children).forEach(function(child) {
+      if (child.tagName === 'OPTGROUP') {
+        var grp = document.createElement('div');
+        grp.className = 'custom-dd-group';
+        grp.textContent = child.label;
+        menu.appendChild(grp);
+        Array.from(child.children).forEach(function(opt) {
+          menu.appendChild(createItem(opt));
+        });
+      } else if (child.tagName === 'OPTION') {
+        menu.appendChild(createItem(child));
+      }
+    });
+  }
+
+  function createItem(opt) {
+    var item = document.createElement('div');
+    item.className = 'custom-dd-item' + (opt.value === currentValue ? ' selected' : '');
+    item.innerHTML = '<span>' + escapeHtml(opt.textContent) + '</span><span class="dd-check">✓</span>';
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      currentValue = opt.value;
+      nativeSelect.value = currentValue;
+      updateTriggerText();
+      closeMenu();
+      nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    return item;
+  }
+
+  function updateTriggerText() {
+    var sel = nativeSelect.options[nativeSelect.selectedIndex];
+    trigger.querySelector('.dd-text').textContent = sel ? sel.textContent : '— Pilih —';
+  }
+
+  function openMenu() {
+    closeAllCustomDD();
+    renderMenu();
+    menu.classList.add('show');
+    trigger.classList.add('open');
+  }
+  function closeMenu() {
+    menu.classList.remove('show');
+    trigger.classList.remove('open');
+  }
+
+  trigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (menu.classList.contains('show')) closeMenu();
+    else openMenu();
+  });
+
+  // Sync saat native select berubah (misal via JS)
+  nativeSelect.addEventListener('change', function() {
+    currentValue = nativeSelect.value;
+    updateTriggerText();
+  });
+
+  // Observe perubahan options
+  var observer = new MutationObserver(function() {
+    updateTriggerText();
+    if (menu.classList.contains('show')) renderMenu();
+  });
+  observer.observe(nativeSelect, { childList: true, subtree: true, characterData: true });
+
+  updateTriggerText();
+}
+
+function closeAllCustomDD() {
+  document.querySelectorAll('.custom-dd-menu.show').forEach(function(m) {
+    m.classList.remove('show');
+    var trg = m.previousElementSibling;
+    if (trg) trg.classList.remove('open');
+  });
+}
+
+// Tutup semua saat klik di luar
+document.addEventListener('click', function() {
+  closeAllCustomDD();
+});
+
+// Inisialisasi semua select saat load
+function initAllCustomDD() {
+  document.querySelectorAll('select').forEach(function(sel) {
+    initCustomDropdown(sel);
+  });
+}
+
+  
+// ============================================================
 // STATE
 // ============================================================
 var PLATFORMS = DEFAULT_PLATFORMS.slice();
 var currentPlatform = 'Takeaway';
 var toko = Object.assign({}, DEFAULT_TOKO);
+var printerConfig = Object.assign({}, DEFAULT_PRINTER_CONFIG);
 var appSettings = JSON.parse(JSON.stringify(DEFAULT_APP_SETTINGS));
 var CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
 var PRODUCTS = DEFAULT_PRODUCTS.slice();
@@ -1369,6 +1743,44 @@ function updatePaymentModeUI() {
   if (!tunai || !nonTunai) return;
   if (paymentMode === 'tunai') { tunai.style.display = 'block'; nonTunai.style.display = 'none'; }
   else { tunai.style.display = 'none'; nonTunai.style.display = 'block'; }
+}
+
+// ============================================================
+// CUSTOM MODAL (ALERT & CONFIRM)
+// ============================================================
+function customAlert(msg, title = 'Informasi', icon = 'ℹ️') {
+  return new Promise(function(resolve) {
+    $('customModalIcon').textContent = icon;
+    $('customModalTitle').textContent = title;
+    $('customModalMsg').textContent = msg;
+    $('customModalActions').innerHTML = '<button class="btn btn-primary" id="btnCustomModalOk" style="flex:1;">Oke</button>';
+    $('customModal').classList.add('active');
+    $('btnCustomModalOk').onclick = function() {
+      $('customModal').classList.remove('active');
+      resolve(true);
+    };
+  });
+}
+
+function customConfirm(msg, title = 'Konfirmasi', icon = '⚠️', confirmText = 'Ya', cancelText = 'Batal', confirmClass = 'btn-danger') {
+  return new Promise(function(resolve) {
+    $('customModalIcon').textContent = icon;
+    $('customModalTitle').textContent = title;
+    $('customModalMsg').textContent = msg;
+    $('customModalActions').innerHTML = `
+      <button class="btn btn-ghost" id="btnCustomModalCancel">${cancelText}</button>
+      <button class="btn ${confirmClass}" id="btnCustomModalConfirm">${confirmText}</button>
+    `;
+    $('customModal').classList.add('active');
+    $('btnCustomModalCancel').onclick = function() {
+      $('customModal').classList.remove('active');
+      resolve(false);
+    };
+    $('btnCustomModalConfirm').onclick = function() {
+      $('customModal').classList.remove('active');
+      resolve(true);
+    };
+  });
 }
 
 // ============================================================
@@ -1530,7 +1942,7 @@ function buildClosingPayload(archivedEntry, closingData) {
     timestamp: closingData.timestamp,
     uploadedAt: firebase.firestore.FieldValue.serverTimestamp(),
     uploadedAtMs: tsUpload.getTime(),
-    appVersion: 'v30.0-cloud'
+    appVersion: 'v32.0-cloud'
   };
 }
 
@@ -1681,6 +2093,10 @@ function saveArchiveSessions() { saveLS(userKey('archive_sessions'), ARCHIVE_SES
 function loadUserData() {
   var t = loadLS(userKey('toko'), null);
   toko = t ? Object.assign({}, DEFAULT_TOKO, t) : Object.assign({}, DEFAULT_TOKO);
+  
+  var pc = loadLS('kasen_printer_config', null);
+  printerConfig = pc ? Object.assign({}, DEFAULT_PRINTER_CONFIG, pc) : Object.assign({}, DEFAULT_PRINTER_CONFIG);
+  
   loadPlatforms();
   var cats = loadLS(userKey('categories'), null);
   CATEGORIES = (cats && cats.length) ? cats : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
@@ -1709,6 +2125,7 @@ function loadUserData() {
   if ($('billTotal')) $('billTotal').value = '';
 }
 function saveToko() { saveLS(userKey('toko'), toko); }
+function savePrinterConfig() { saveLS('kasen_printer_config', printerConfig); }
 function saveCats() { saveLS(userKey('categories'), CATEGORIES); }
 function saveProducts() { saveLS(userKey('products'), PRODUCTS); }
 function saveTransactions() { saveLS(userKey('transactions'), TRANSACTIONS); }
@@ -1831,7 +2248,8 @@ function cleanupUnusedCache() {
 async function runSync(silent) {
   if (silent === undefined) silent = false;
   if (!silent) {
-    if (!confirm('Sinkronisasi lokal akan membersihkan arsip sesi >1 tahun & cache lama.\n\nLanjut?')) return;
+    var okSync = await customConfirm('Sinkronisasi lokal akan membersihkan arsip sesi >1 tahun & cache lama.\n\nLanjut?', 'Sinkronisasi Lokal', '🔄', 'Mulai Sync', 'Batal', 'btn-primary');
+    if (!okSync) return;
   }
   var before = getStorageUsage().totalBytes;
   var clean = cleanupUnusedCache();
@@ -1839,7 +2257,7 @@ async function runSync(silent) {
   renderSyncInfo();
   var saved = before - after;
   var msg = '✅ Sinkronisasi selesai\n\n🧹 Dibersihkan: ' + clean.cleaned + ' item\n💾 Storage: ' + formatBytes(before) + ' → ' + formatBytes(after) + '\n📉 Hemat: ' + formatBytes(saved);
-  if (!silent) alert(msg);
+  if (!silent) customAlert(msg, 'Sync Selesai', '✅');
   log('Sync lokal: -' + formatBytes(saved));
 }
 
@@ -1888,10 +2306,16 @@ function startSession() {
   rekapSessionFilter = '__active__';
   trxSessionFilter = '__active__';
   renderRekapSessionSelect();
+  updateRekapDateFilterVisibility();
+  initAllCustomDD();   // ✅ Tambahkan
   renderTrxSessionSelect();
   renderRekap();
   renderTransactions();
+  updateTrxSessionBanner();
+  initAllCustomDD();   // ✅ Tambahkan
+  
 }
+  
 function renderSessionBar() {
   var bar = $('sessionBar');
   if (!bar) return;
@@ -2074,7 +2498,7 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
   var el = $('tab-' + tab); if (el) el.classList.add('active');
   if (tab === 'produk') { renderFilterSub(); renderManageProducts(); renderManageCats(); }
-  if (tab === 'toko') { renderInfoToko(); renderExpenses(); renderTutupToko(); }
+  if (tab === 'toko') { renderTokoData(); renderInfoToko(); renderExpenses(); renderTutupToko(); }
   if (tab === 'riwayat') { renderTrxSessionSelect(); renderTransactions(); renderClosingsList(); }
   if (tab === 'rekap') { renderRekapSessionSelect(); renderRekap(); }
   updateDrawerActiveTab();
@@ -2177,6 +2601,7 @@ function renderAll() {
   renderRekapSessionSelect();
   renderRekap();
   renderSessionBar();
+  renderTokoData();
   updateDrawerActiveTab();
   updateDrawerUser();
 }
@@ -2325,8 +2750,10 @@ function changeQty(id, d) {
 }
 function clearCart() {
   if (cart.length === 0) return;
-  if (!confirm('Hapus semua item?')) return;
-  cart = []; uangDibayar = 0; $('payInput').value = ''; renderCart();
+  customConfirm('Hapus semua item dari keranjang?', 'Hapus Keranjang', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    cart = []; uangDibayar = 0; $('payInput').value = ''; renderCart();
+  });
 }
 function total() { return cart.reduce(function(s, c) { return s + c.harga * c.qty; }, 0); }
 function renderCart() {
@@ -2397,7 +2824,7 @@ function rememberPairedDevice(dev) {
   savePairedDevices();
 }
 async function openBtModal() {
-  if (!navigator.bluetooth) { alert('Browser tidak mendukung Web Bluetooth.'); return; }
+  if (!navigator.bluetooth) { customAlert('Browser tidak mendukung Web Bluetooth.', 'Tidak Didukung', '⚠️'); return; }
   bluetoothModalOpen = true;
   pairedDevices = loadPairedDevices();
   updateBtStatusUI(); renderSavedDevices();
@@ -2442,10 +2869,12 @@ function renderSavedDevices() {
       var devId = el.dataset.forget;
       var d = pairedDevices.find(function(x) { return x.id === devId; });
       if (!d) return;
-      if (!confirm('Lupakan printer "' + d.name + '"?')) return;
-      pairedDevices = pairedDevices.filter(function(x) { return x.id !== devId; });
-      savePairedDevices(); renderSavedDevices(); updateBtStatusUI();
-      toast('Printer dihapus', 'success');
+      customConfirm('Lupakan printer "' + d.name + '"?', 'Hapus Printer', '📡', 'Ya, Lupakan', 'Batal', 'btn-danger').then(function(ok) {
+        if (!ok) return;
+        pairedDevices = pairedDevices.filter(function(x) { return x.id !== devId; });
+        savePairedDevices(); renderSavedDevices(); updateBtStatusUI();
+        toast('Printer dihapus', 'success');
+      });
     });
   });
 }
@@ -2468,7 +2897,7 @@ async function pairNewPrinter() {
     pairedDevices = loadPairedDevices();
     renderSavedDevices(); updateBtStatusUI();
   } catch (e) {
-    if (e.name !== 'NotFoundError') toast('Gagal: ' + e.message, 'error');
+    if (e.name !== 'NotFoundError') customAlert('Gagal: ' + e.message, 'Gagal Pairing', '❌');
   } finally { btn.disabled = false; btn.textContent = '📡 Pair Printer Baru'; }
 }
 async function reconnectToSavedDevice(deviceId) {
@@ -2526,7 +2955,6 @@ function updateStatus(on) {
   $('statusText').textContent = on ? 'Printer terhubung' : 'Printer belum terhubung';
 }
 
-// ✅ AUTO-RECONNECT dengan lock agar tidak overlap
 var _autoReconnectLock = false;
 async function tryAutoReconnect() {
   if (_autoReconnectLock) return;
@@ -2580,13 +3008,13 @@ var cmd = {
   cut: function() { return new Uint8Array([GS,0x56,0x00]); }
 };
 function lineItem(nama, qty, sub, lebar) {
-  if (lebar === undefined) lebar = 32;
+  if (lebar === undefined) lebar = printerConfig.chars || 32;
   var k = nama + ' x' + qty; var r = 'Rp' + sub.toLocaleString('id-ID');
   if (k.length + r.length + 1 > lebar) k = k.slice(0, lebar - r.length - 1);
   return k + ' '.repeat(Math.max(1, lebar - k.length - r.length)) + r + '\n';
 }
 function lineTotal(label, nilai, lebar) {
-  if (lebar === undefined) lebar = 32;
+  if (lebar === undefined) lebar = printerConfig.chars || 32;
   var r = 'Rp' + nilai.toLocaleString('id-ID');
   return label + ' '.repeat(Math.max(1, lebar - label.length - r.length)) + r + '\n';
 }
@@ -2596,7 +3024,7 @@ function footerLines() {
 }
 
 function formatStrukText(trx) {
-  var LEBAR = 32;
+  var LEBAR = printerConfig.chars || 32;
   var pad = function(kiri, kanan) {
     if (kiri.length + kanan.length + 1 > LEBAR) kiri = kiri.slice(0, LEBAR - kanan.length - 1);
     return kiri + ' '.repeat(Math.max(1, LEBAR - kiri.length - kanan.length)) + kanan;
@@ -2638,7 +3066,7 @@ function formatStrukText(trx) {
   return lines.join('\n');
 }
 function formatClosingText(cl) {
-  var LEBAR = 32;
+  var LEBAR = printerConfig.chars || 32;
   var pad = function(k, kn) {
     if (k.length + kn.length + 1 > LEBAR) k = k.slice(0, LEBAR - kn.length - 1);
     return k + ' '.repeat(Math.max(1, LEBAR - k.length - kn.length)) + kn;
@@ -2768,7 +3196,7 @@ async function printStrukToPrinter(trx) {
   var fl = footerLines();
   for (var fi = 0; fi < fl.length; fi++) await kirim(textToBytes(fl[fi] + '\n'));
   await kirim(textToBytes('\n\n\n'));
-  await kirim(cmd.cut());
+  if (printerConfig.autoCut) await kirim(cmd.cut());
 }
 async function printClosingToPrinter(cl) {
   if (!isConnected || !characteristic) throw new Error('Printer belum terhubung');
@@ -2867,25 +3295,32 @@ async function printClosingToPrinter(cl) {
   for (var fj = 0; fj < fl2.length; fj++) await kirim(textToBytes(fl2[fj] + '\n'));
   await kirim(textToBytes('Shift Selesai\n'));
   await kirim(textToBytes('\n\n\n'));
-  await kirim(cmd.cut());
+  if (printerConfig.autoCut) await kirim(cmd.cut());
 }
 
 // ============================================================
 // FLOW BAYAR
 // ============================================================
-function openPayModal() {
-  if (cart.length === 0) return alert('Keranjang kosong!');
+async function openPayModal() {
+  if (cart.length === 0) return customAlert('Keranjang masih kosong!', 'Peringatan', '🛒');
   if (!currentSessionId) {
-    if (!confirm('Belum ada sesi kasir aktif.\nMulai sesi baru terlebih dahulu?')) return;
-    openStartSessionModal(); return;
+    var okSes = await customConfirm('Belum ada sesi kasir aktif.\nMulai sesi baru terlebih dahulu?', 'Sesi Belum Aktif', '🌅', 'Mulai Sesi', 'Batal', 'btn-primary');
+    if (okSes) openStartSessionModal();
+    return;
   }
   if (!isConnected || !characteristic) {
-    if (!confirm('Printer belum terhubung.\nLanjut tetap bayar tanpa cetak?')) return;
+    var okPrint = await customConfirm('Printer belum terhubung.\nLanjut tetap bayar tanpa cetak?', 'Printer Offline', '🖨️', 'Lanjut', 'Batal', 'btn-warning');
+    if (!okPrint) return;
   }
+  
+  executeOpenPayModal();
+}
+
+function executeOpenPayModal() {
   var t = total();
   var bayar, kembali;
   if (paymentMode === 'nontunai') {
-    if (billTotal <= 0) return alert('Total tagihan belum diisi!');
+    if (billTotal <= 0) return customAlert('Total tagihan belum diisi!', 'Tagihan Kosong', '⚠️');
     bayar = billTotal; kembali = 0;
   } else {
     if (!uangDibayar || uangDibayar < t) uangDibayar = t;
@@ -2928,6 +3363,7 @@ function openPayModal() {
   $('payModal').classList.add('active');
   $('payModal')._pendingTrx = trxPreview;
 }
+
 function updatePayPreview(trx) {
   $('strukPreview').textContent = formatStrukText(trx);
   var kembali = trx.kembali;
@@ -2970,8 +3406,51 @@ async function doBayarDanCetak() {
   renderCart();
   renderTransactions();
   renderRekap();
+  renderTokoData();
   $('payModal').classList.remove('active'); $('payModal')._pendingTrx = null;
   btn.disabled = false; btn.textContent = '🖨️ Bayar & Cetak';
+}
+
+// ============================================================
+// TOKO & FINANCE
+// ============================================================
+function renderTokoData() {
+  var grid = $('tokoFinanceGrid');
+  if (!grid) return;
+
+  var stats = getTodayStats();
+  var totalTunai = stats.transactions.filter(function(t) { return t.paymentMode !== 'nontunai'; }).reduce(function(s, t) { return s + t.total; }, 0);
+  var ses = SESSIONS.find(function(s) { return s.id === currentSessionId; });
+  var modalAwal = ses ? ses.modalAwal : 0;
+  var kasAkhir = modalAwal + totalTunai - stats.totalPengeluaran;
+
+  grid.innerHTML = '' +
+    '<div class="finance-grid">' +
+      '<div class="finance-card">' +
+        '<div class="fc-icon">💼</div>' +
+        '<div class="fc-label">Modal Awal</div>' +
+        '<div class="fc-value">' + fmtRp(modalAwal) + '</div>' +
+        '<div class="fc-sub">' + (ses ? ses.id : 'Belum ada sesi') + '</div>' +
+      '</div>' +
+      '<div class="finance-card success">' +
+        '<div class="fc-icon">💵</div>' +
+        '<div class="fc-label">Pembayaran Tunai</div>' +
+        '<div class="fc-value">' + fmtRp(totalTunai) + '</div>' +
+        '<div class="fc-sub">Cash only</div>' +
+      '</div>' +
+      '<div class="finance-card danger">' +
+        '<div class="fc-icon">💸</div>' +
+        '<div class="fc-label">Pengeluaran</div>' +
+        '<div class="fc-value">' + fmtRp(stats.totalPengeluaran) + '</div>' +
+        '<div class="fc-sub">' + EXPENSES.filter(function(e) { return e.tanggal === (ses ? ses.tanggal : todayISO()); }).length + ' item</div>' +
+      '</div>' +
+      '<div class="finance-card highlight">' +
+        '<div class="fc-icon">🏦</div>' +
+        '<div class="fc-label">Kas Akhir Kasir</div>' +
+        '<div class="fc-value">' + fmtRp(kasAkhir) + '</div>' +
+        '<div class="fc-sub">Modal + Tunai − Keluar</div>' +
+      '</div>' +
+    '</div>';
 }
 
 // ============================================================
@@ -3133,6 +3612,7 @@ async function doClosingProcess() {
   renderTutupToko(); renderClosingsList();
   renderTransactions();
   renderRekap();
+  renderTokoData();
 
   setTimeout(function() { toast('✅ Tutup toko selesai', 'success'); }, 700);
   setTimeout(function() {
@@ -3151,7 +3631,8 @@ async function reprintClosing(closingId) {
   var cl = CLOSINGS.find(function(c) { return c.id === closingId; });
   if (!cl) return toast('Data closing tidak ditemukan', 'error');
   if (!isConnected || !characteristic) return toast('Printer belum terhubung', 'error');
-  if (!confirm('Cetak ulang struk tutup toko ' + cl.id + '?')) return;
+  var okR = await customConfirm('Cetak ulang struk tutup toko ' + cl.id + '?', 'Cetak Ulang', '🖨️', 'Cetak', 'Batal', 'btn-primary');
+  if (!okR) return;
   toast('Mencetak ulang...', 'success');
   try {
     await printClosingToPrinter(cl);
@@ -3344,7 +3825,8 @@ async function reprintStruk(trxId) {
   var trx = findTransactionById(trxId);
   if (!trx) return toast('Transaksi tidak ditemukan', 'error');
   if (!isConnected || !characteristic) return toast('Printer belum terhubung', 'error');
-  if (!confirm('Cetak ulang struk ' + trx.id + '?')) return;
+  var okP = await customConfirm('Cetak ulang struk ' + trx.id + '?', 'Cetak Ulang', '🖨️', 'Cetak', 'Batal', 'btn-primary');
+  if (!okP) return;
   toast('Mencetak ulang...', 'success');
   try {
     await printStrukToPrinter(trx);
@@ -3640,6 +4122,7 @@ function renderRekap() {
   }
   html += '</div>';
 
+  // ✅ UPDATE: Semua Produk Terjual (bukan Top 10)
   var perProduk = {};
   list.forEach(function(t) {
     (t.items || []).forEach(function(it) {
@@ -3648,18 +4131,27 @@ function renderRekap() {
       perProduk[it.nama].subtotal += it.subtotal;
     });
   });
-  html += '<div class="rekap-block"><h3>🏆 Top 10 Produk Terlaris</h3>';
-  var prodEntries = Object.keys(perProduk).sort(function(a, b) { return perProduk[b].qty - perProduk[a].qty; }).slice(0, 10);
+  html += '<div class="rekap-block"><h3>📦 Semua Produk Terjual</h3>';
+  var prodEntries = Object.keys(perProduk).sort(function(a, b) { return perProduk[b].qty - perProduk[a].qty; });
   if (prodEntries.length === 0) html += '<div style="text-align:center;color:var(--muted);font-size:12px;padding:12px;">Belum ada data</div>';
   else {
+    var totalQtyProd = 0;
+    var totalSubProd = 0;
     prodEntries.forEach(function(k, i) {
       var p = perProduk[k];
+      totalQtyProd += p.qty;
+      totalSubProd += p.subtotal;
       var rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
       html += '<div class="rekap-row">' +
         '<div class="rk-rank ' + rankClass + '">' + (i+1) + '</div>' +
         '<div class="rk-info"><div class="rk-nama">' + escapeHtml(k) + '</div><div class="rk-meta">' + p.qty + ' terjual</div></div>' +
         '<div class="rk-val">' + fmtRp(p.subtotal) + '</div></div>';
     });
+    // Total Keseluruhan
+    html += '<div class="rekap-row" style="background:var(--primary-soft);font-weight:800;margin-top:8px;border-radius:6px;padding:10px;">' +
+      '<div class="rk-info"><div class="rk-nama" style="color:var(--primary);">TOTAL KESELURUHAN</div><div class="rk-meta">' + prodEntries.length + ' jenis produk</div></div>' +
+      '<div class="rk-val" style="font-size:14px;color:var(--primary);">' + totalQtyProd + ' Qty / ' + fmtRp(totalSubProd) + '</div>' +
+    '</div>';
   }
   html += '</div>';
 
@@ -3801,13 +4293,15 @@ function hapusPlatform(id) {
   var p = PLATFORMS.find(function(x) { return x.id === id; });
   if (!p) return;
   var count = CATEGORIES.filter(function(c) { return (c.platform || 'Takeaway') === id; }).length;
-  if (!confirm('Hapus platform "' + p.nama + '"?\n' + count + ' kategori akan ikut terhapus.')) return;
-  CATEGORIES = CATEGORIES.filter(function(c) { return (c.platform || 'Takeaway') !== id; });
-  PLATFORMS = PLATFORMS.filter(function(x) { return x.id !== id; });
-  savePlatforms(); saveCats();
-  if (currentPlatform === id) currentPlatform = PLATFORMS[0] ? PLATFORMS[0].id : 'Takeaway';
-  renderPlatformManage(); renderManageCats(); renderKasir();
-  toast('Platform dihapus', 'success');
+  customConfirm('Hapus platform "' + p.nama + '"?\n' + count + ' kategori akan ikut terhapus.', 'Hapus Platform', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    CATEGORIES = CATEGORIES.filter(function(c) { return (c.platform || 'Takeaway') !== id; });
+    PLATFORMS = PLATFORMS.filter(function(x) { return x.id !== id; });
+    savePlatforms(); saveCats();
+    if (currentPlatform === id) currentPlatform = PLATFORMS[0] ? PLATFORMS[0].id : 'Takeaway';
+    renderPlatformManage(); renderManageCats(); renderKasir();
+    toast('Platform dihapus', 'success');
+  });
 }
 function openCatModal(id) {
   if (id === undefined) id = null;
@@ -3849,14 +4343,16 @@ function simpanCat() {
 function hapusCat(id) {
   var c = CATEGORIES.find(function(x) { return x.id === id; }); if (!c) return;
   var count = c.subs.reduce(function(s, sub) { return s + countProductsInSub(sub.id); }, 0);
-  if (!confirm('Hapus kategori "' + c.nama + '"?\nAkan menghapus ' + c.subs.length + ' sub-kategori & ' + count + ' produk.')) return;
-  var subIds = c.subs.map(function(s) { return s.id; });
-  PRODUCTS = PRODUCTS.filter(function(p) { return subIds.indexOf(p.subId) === -1; });
-  CATEGORIES = CATEGORIES.filter(function(x) { return x.id !== id; });
-  saveCats(); saveProducts();
-  if (navCatId === id) { navCatId = null; navSubId = null; }
-  renderManageCats(); renderKasir(); renderManageProducts(); renderFilterSub();
-  toast('Kategori dihapus', 'success');
+  customConfirm('Hapus kategori "' + c.nama + '"?\nAkan menghapus ' + c.subs.length + ' sub-kategori & ' + count + ' produk.', 'Hapus Kategori', '🗑️').then(function(ok) {
+    if (!ok) return;
+    var subIds = c.subs.map(function(s) { return s.id; });
+    PRODUCTS = PRODUCTS.filter(function(p) { return subIds.indexOf(p.subId) === -1; });
+    CATEGORIES = CATEGORIES.filter(function(x) { return x.id !== id; });
+    saveCats(); saveProducts();
+    if (navCatId === id) { navCatId = null; navSubId = null; }
+    renderManageCats(); renderKasir(); renderManageProducts(); renderFilterSub();
+    toast('Kategori dihapus', 'success');
+  });
 }
 function openSubModal(catId, subId) {
   if (subId === undefined) subId = null;
@@ -3890,13 +4386,15 @@ function hapusSub(catId, subId) {
   var cat = CATEGORIES.find(function(x) { return x.id === catId; }); if (!cat) return;
   var s = cat.subs.find(function(x) { return x.id === subId; }); if (!s) return;
   var count = countProductsInSub(subId);
-  if (!confirm('Hapus sub-kategori "' + s.nama + '"?' + (count > 0 ? '\n' + count + ' produk di dalamnya juga akan terhapus.' : ''))) return;
-  PRODUCTS = PRODUCTS.filter(function(p) { return p.subId !== subId; });
-  cat.subs = cat.subs.filter(function(x) { return x.id !== subId; });
-  saveCats(); saveProducts();
-  if (navSubId === subId) navSubId = null;
-  renderManageCats(); renderKasir(); renderManageProducts(); renderFilterSub();
-  toast('Sub-kategori dihapus', 'success');
+  customConfirm('Hapus sub-kategori "' + s.nama + '"?' + (count > 0 ? '\n' + count + ' produk di dalamnya juga akan terhapus.' : ''), 'Hapus Sub-Kategori', '🗑️').then(function(ok) {
+    if (!ok) return;
+    PRODUCTS = PRODUCTS.filter(function(p) { return p.subId !== subId; });
+    cat.subs = cat.subs.filter(function(x) { return x.id !== subId; });
+    saveCats(); saveProducts();
+    if (navSubId === subId) navSubId = null;
+    renderManageCats(); renderKasir(); renderManageProducts(); renderFilterSub();
+    toast('Sub-kategori dihapus', 'success');
+  });
 }
 
 // ============================================================
@@ -4012,11 +4510,14 @@ function simpanProduk() {
 }
 function hapusProduk(id) {
   var p = PRODUCTS.find(function(x) { return x.id === id; });
-  if (!p || !confirm('Hapus "' + p.nama + '"?')) return;
-  PRODUCTS = PRODUCTS.filter(function(x) { return x.id !== id; });
-  cart = cart.filter(function(c) { return c.id !== id; });
-  saveProducts(); renderManageProducts(); renderKasir(); renderCart();
-  toast('Produk dihapus', 'success');
+  if (!p) return;
+  customConfirm('Hapus produk "' + p.nama + '"?', 'Hapus Produk', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    PRODUCTS = PRODUCTS.filter(function(x) { return x.id !== id; });
+    cart = cart.filter(function(c) { return c.id !== id; });
+    saveProducts(); renderManageProducts(); renderKasir(); renderCart();
+    toast('Produk dihapus', 'success');
+  });
 }
 
 // ============================================================
@@ -4087,13 +4588,17 @@ function simpanExpense() {
     toast('Pengeluaran ditambahkan', 'success');
   }
   saveExpenses(); $('filterBulanExpense').value = tanggal.slice(0,7);
-  renderExpenses(); closeExpenseModal(); renderTutupToko(); renderRekap();
+  renderExpenses(); closeExpenseModal(); renderTutupToko(); renderRekap(); renderTokoData();
 }
 function hapusExpense(id) {
   var e = EXPENSES.find(function(x) { return x.id === id; });
-  if (!e || !confirm('Hapus "' + (e.keterangan || e.kategori) + '"?')) return;
-  EXPENSES = EXPENSES.filter(function(x) { return x.id !== id; });
-  saveExpenses(); renderExpenses(); renderTutupToko(); renderRekap(); toast('Pengeluaran dihapus', 'success');
+  if (!e) return;
+  customConfirm('Hapus pengeluaran "' + (e.keterangan || e.kategori) + '"?', 'Hapus Pengeluaran', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    EXPENSES = EXPENSES.filter(function(x) { return x.id !== id; });
+    saveExpenses(); renderExpenses(); renderTutupToko(); renderRekap(); renderTokoData(); 
+    toast('Pengeluaran dihapus', 'success');
+  });
 }
 
 // ============================================================
@@ -4153,10 +4658,12 @@ safeAdd('btnCloseSync', 'click', function() { $('syncModal').classList.remove('a
 safeAdd('btnCloseCloud', 'click', function() { $('cloudModal').classList.remove('active'); });
 safeAdd('btnSyncNow', 'click', function() { runSync(false); });
 safeAdd('btnCleanupCache', 'click', function() {
-  if (!confirm('Bersihkan cache & arsip lama (>1 tahun)?')) return;
-  var r = cleanupUnusedCache();
-  renderSyncInfo();
-  alert('✅ Dibersihkan\n\nHemat: ' + formatBytes(r.savedBytes) + '\nItem: ' + r.cleaned);
+  customConfirm('Bersihkan cache & arsip lama (>1 tahun)?', 'Bersihkan Cache', '🧹', 'Bersihkan', 'Batal', 'btn-primary').then(function(ok) {
+    if (!ok) return;
+    var r = cleanupUnusedCache();
+    renderSyncInfo();
+    customAlert('Cache dibersihkan.\n\nHemat: ' + formatBytes(r.savedBytes) + '\nItem: ' + r.cleaned, 'Selesai', '✅');
+  });
 });
 safeAdd('btnForceSyncCloud', 'click', function() {
   if (!cloudReady) {
@@ -4194,32 +4701,36 @@ safeAdd('menuBackup', 'click', function() {
   toast('Backup diunduh', 'success');
 });
 safeAdd('menuAbout', 'click', function() {
-  alert(appSettings.appName + ' v30.0\n\nFitur:\n+ Auto-reconnect printer\n+ Kartu tunai/non-tunai di riwayat\n+ Login cepat (tanpa PIN)\n+ Ringkasan keuangan baru\n+ ☁️ Cloud Sync (Firebase)\n+ Role: Crew / Leader\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
+  customAlert(appSettings.appName + '\n\nFitur:\n+ Auto-reconnect printer\n+ Kartu tunai/non-tunai di riwayat\n+ Login cepat (tanpa PIN)\n+ Ringkasan keuangan baru\n+ ☁️ Cloud Sync (Firebase)\n+ Semua Produk Terjual\n+ Custom Modal & Dropdown\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
     '\nRole: ' + (ROLE_LABEL[getUserRole()] || '-') +
     '\nDevice ID: ' + getDeviceId() +
-    '\nPending upload: ' + getPendingCount());
+    '\nPending upload: ' + getPendingCount(), 'Tentang Aplikasi', 'ℹ️');
 });
 safeAdd('menuLogout', 'click', logout);
 safeAdd('menuReset', 'click', function() {
-  if (!confirm('⚠️ Reset SEMUA data device ini?')) return;
-  if (!confirm('Yakin?')) return;
-  ['toko','categories','products','transactions','expenses','closings','archive_sessions','platforms','sessions','migrated_v27','pending_uploads'].forEach(function(k) {
-    localStorage.removeItem('kasen_' + k);
+  customConfirm('Reset SEMUA data device ini?\n\nSemua produk, transaksi, dan sesi akan hilang.', 'Peringatan Reset', '⚠️', 'Reset Data', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    customConfirm('Yakin? Tindakan ini tidak bisa dibatalkan.', 'Konfirmasi Akhir', '⚠️', 'Ya, Hapus Semua', 'Batal', 'btn-danger').then(function(ok2) {
+      if (!ok2) return;
+      ['toko','categories','products','transactions','expenses','closings','archive_sessions','platforms','sessions','migrated_v27','pending_uploads'].forEach(function(k) {
+        localStorage.removeItem('kasen_' + k);
+      });
+      toko = Object.assign({}, DEFAULT_TOKO);
+      PLATFORMS = JSON.parse(JSON.stringify(DEFAULT_PLATFORMS));
+      CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
+      PRODUCTS = DEFAULT_PRODUCTS.slice();
+      TRANSACTIONS = []; EXPENSES = []; CLOSINGS = []; SESSIONS = []; ARCHIVE_SESSIONS = []; cart = []; uangDibayar = 0;
+      navCatId = null; navSubId = null; currentSessionId = null;
+      rekapSessionFilter = '__active__'; trxSessionFilter = '__active__';
+      currentPlatform = PLATFORMS[0].id;
+      $('payInput').value = '';
+      $('settingsModal').classList.remove('active');
+      saveToko(); savePlatforms(); saveCats(); saveProducts(); saveTransactions(); saveExpenses(); saveClosings(); saveSessions(); saveArchiveSessions();
+      renderAll();
+      updateCloudIndicator('synced');
+      toast('Data device direset', 'success');
+    });
   });
-  toko = Object.assign({}, DEFAULT_TOKO);
-  PLATFORMS = JSON.parse(JSON.stringify(DEFAULT_PLATFORMS));
-  CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
-  PRODUCTS = DEFAULT_PRODUCTS.slice();
-  TRANSACTIONS = []; EXPENSES = []; CLOSINGS = []; SESSIONS = []; ARCHIVE_SESSIONS = []; cart = []; uangDibayar = 0;
-  navCatId = null; navSubId = null; currentSessionId = null;
-  rekapSessionFilter = '__active__'; trxSessionFilter = '__active__';
-  currentPlatform = PLATFORMS[0].id;
-  $('payInput').value = '';
-  $('settingsModal').classList.remove('active');
-  saveToko(); savePlatforms(); saveCats(); saveProducts(); saveTransactions(); saveExpenses(); saveClosings(); saveSessions(); saveArchiveSessions();
-  renderAll();
-  updateCloudIndicator('synced');
-  toast('Data device direset', 'success');
 });
 safeAdd('btnStartSession', 'click', startSession);
 safeAdd('btnCancelStartSession', 'click', function() {
@@ -4245,11 +4756,13 @@ safeAdd('btnClearHistory', 'click', function() {
     if (!currentSessionId) return toast('Tidak ada sesi aktif', 'error');
     var list = TRANSACTIONS.filter(function(t) { return t.sessionId === currentSessionId; });
     if (list.length === 0) return toast('Tidak ada transaksi aktif', 'error');
-    if (!confirm('Hapus ' + list.length + ' transaksi sesi aktif ini?')) return;
-    TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.sessionId !== currentSessionId; });
-    saveTransactions();
-    renderTransactions(); renderRekap(); renderTutupToko();
-    toast('Transaksi sesi aktif dihapus', 'success');
+    customConfirm('Hapus ' + list.length + ' transaksi sesi aktif ini?', 'Hapus Riwayat', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+      if (!ok) return;
+      TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.sessionId !== currentSessionId; });
+      saveTransactions();
+      renderTransactions(); renderRekap(); renderTutupToko(); renderTokoData();
+      toast('Transaksi sesi aktif dihapus', 'success');
+    });
     return;
   }
   toast('Hanya bisa hapus transaksi sesi aktif', 'error');
@@ -4259,19 +4772,25 @@ safeAdd('btnDeleteTrx', 'click', function() {
   var trx = findTransactionById(currentTrxDetailId);
   if (!trx) return;
   if (isSessionArchived(trx.sessionId)) {
-    if (!confirm('Transaksi ini ada di ARSIP. Yakin hapus permanen?')) return;
-    var arch = getArchivedSession(trx.sessionId);
-    if (arch) {
-      arch.transactions = (arch.transactions || []).filter(function(t) { return t.id !== currentTrxDetailId; });
-      saveArchiveSessions();
-    }
+    customConfirm('Transaksi ini ada di ARSIP. Yakin hapus permanen?', 'Hapus Transaksi', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+      if (!ok) return;
+      var arch = getArchivedSession(trx.sessionId);
+      if (arch) {
+        arch.transactions = (arch.transactions || []).filter(function(t) { return t.id !== currentTrxDetailId; });
+        saveArchiveSessions();
+      }
+      closeTrxModal(); renderTransactions(); renderRekap(); renderTutupToko(); renderTokoData();
+      toast('Transaksi dihapus', 'success');
+    });
   } else {
-    if (!confirm('Hapus transaksi ini?')) return;
-    TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.id !== currentTrxDetailId; });
-    saveTransactions();
+    customConfirm('Hapus transaksi ini?', 'Hapus Transaksi', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+      if (!ok) return;
+      TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.id !== currentTrxDetailId; });
+      saveTransactions();
+      closeTrxModal(); renderTransactions(); renderRekap(); renderTutupToko(); renderTokoData();
+      toast('Transaksi dihapus', 'success');
+    });
   }
-  closeTrxModal(); renderTransactions(); renderRekap(); renderTutupToko();
-  toast('Transaksi dihapus', 'success');
 });
 safeAdd('btnReprintFromDetail', 'click', function() { if (currentTrxDetailId) reprintStruk(currentTrxDetailId); });
 safeAdd('btnClosingCancel', 'click', function() { $('closingConfirmModal').classList.remove('active'); });
@@ -4357,13 +4876,15 @@ safeAdd('btnSaveApp', 'click', function() {
   toast('Pengaturan disimpan', 'success');
 });
 safeAdd('btnResetApp', 'click', function() {
-  if (!confirm('Reset tampilan ke default?')) return;
-  appSettings.theme = Object.assign({}, DEFAULT_APP_SETTINGS.theme);
-  appSettings.font = Object.assign({}, DEFAULT_APP_SETTINGS.font);
-  appSettings.mode = 'light';
-  appSettings.appName = DEFAULT_APP_SETTINGS.appName;
-  saveAppSettings(); applyTheme(); openEditAppModal();
-  toast('Tampilan direset', 'success');
+  customConfirm('Reset tampilan ke default?', 'Reset Tampilan', '🔄', 'Reset', 'Batal', 'btn-primary').then(function(ok) {
+    if (!ok) return;
+    appSettings.theme = Object.assign({}, DEFAULT_APP_SETTINGS.theme);
+    appSettings.font = Object.assign({}, DEFAULT_APP_SETTINGS.font);
+    appSettings.mode = 'light';
+    appSettings.appName = DEFAULT_APP_SETTINGS.appName;
+    saveAppSettings(); applyTheme(); openEditAppModal();
+    toast('Tampilan direset', 'success');
+  });
 });
 safeAdd('toggleKatManage', 'click', function() {
   var body = $('katManageBody');
@@ -4550,6 +5071,30 @@ document.querySelectorAll('.modal-bg').forEach(function(m) {
   });
 });
 
+// ✅ Event Printer Settings
+safeAdd('menuPrinterSettings', 'click', function() {
+  $('settingsModal').classList.remove('active');
+  $('selPrinterType').value = printerConfig.type || 'Thermal';
+  $('selPrinterMode').value = printerConfig.mode || 'Standard Printing';
+  $('selPrinterConn').value = printerConfig.conn || 'Bluetooth';
+  $('inpPrinterName').value = printerConfig.name || '';
+  $('inpPrinterChars').value = printerConfig.chars || 32;
+  $('chkAutoCut').checked = printerConfig.autoCut || false;
+  $('printerSettingsModal').classList.add('active');
+});
+safeAdd('btnCancelPrinterSettings', 'click', function() { $('printerSettingsModal').classList.remove('active'); });
+safeAdd('btnSavePrinterSettings', 'click', function() {
+  printerConfig.type = $('selPrinterType').value;
+  printerConfig.mode = $('selPrinterMode').value;
+  printerConfig.conn = $('selPrinterConn').value;
+  printerConfig.name = $('inpPrinterName').value.trim();
+  printerConfig.chars = parseInt($('inpPrinterChars').value) || 32;
+  printerConfig.autoCut = $('chkAutoCut').checked;
+  savePrinterConfig();
+  $('printerSettingsModal').classList.remove('active');
+  toast('Pengaturan printer disimpan', 'success');
+});
+
 function renderPresets() {
   var row = $('presetRow'); if (!row) return;
   row.innerHTML = PRESETS.map(function(p, i) {
@@ -4608,7 +5153,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
   var btn = $('drawerInstall'); if (btn) btn.style.display = 'flex';
 });
 async function installPWA() {
-  if (!deferredPrompt) { alert('Buka menu browser → "Install app"'); return; }
+  if (!deferredPrompt) { customAlert('Buka menu browser → "Install app"', 'Install Aplikasi', '📲'); return; }
   deferredPrompt.prompt();
   await deferredPrompt.userChoice;
   deferredPrompt = null;
@@ -4632,6 +5177,7 @@ loadGlobal();
 migrateToDeviceWide();
 applyTheme();
 updateDrawerUser();
+initAllCustomDD();   // ✅ Tambahkan baris ini
 
 var dgb = $('drawerBg');
 if (dgb) { dgb.classList.remove('active'); dgb.style.display = ''; }
