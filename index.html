@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#000000">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -1241,6 +1241,23 @@
       <div class="menu-icon">💾</div>
       <div class="menu-info"><div class="menu-title">Backup Data</div><div class="menu-desc">Export JSON device ini</div></div>
     </button>
+<!-- ✅ FITUR BARU: EXPORT & IMPORT DATA APLIKASI -->
+<button class="menu-item" id="menuExportAppData" data-role-lock="leader">
+  <div class="menu-icon">📤</div>
+  <div class="menu-info">
+    <div class="menu-title">Simpan Data Aplikasi</div>
+    <div class="menu-desc">Export semua menu, setingan & data ke .kasen</div>
+  </div>
+</button>
+<button class="menu-item" id="menuImportAppData" data-role-lock="leader">
+  <div class="menu-icon">📥</div>
+  <div class="menu-info">
+    <div class="menu-title">Uplod Data Aplikasi</div>
+    <div class="menu-desc">Import menu & setingan dari file .kasen</div>
+  </div>
+</button>
+    <input type="file" id="fileImportAppData" accept=".kasen,application/json" style="display:none;">
+<!-- END FITUR BARU -->
     <button class="menu-item" id="menuAbout">
       <div class="menu-icon">ℹ️</div>
       <div class="menu-info"><div class="menu-title">Tentang</div><div class="menu-desc">Versi & info</div></div>
@@ -4687,6 +4704,22 @@ safeAdd('menuCloudSync', 'click', function() {
 });
 safeAdd('menuSync', 'click', function() { $('settingsModal').classList.remove('active'); renderSyncInfo(); $('syncModal').classList.add('active'); });
 safeAdd('menuEditApp', 'click', function() { $('settingsModal').classList.remove('active'); openEditAppModal(); });
+  safeAdd('menuExportAppData', 'click', function() {
+  $('settingsModal').classList.remove('active');
+  exportAppData();
+});
+
+safeAdd('menuImportAppData', 'click', function() {
+  $('settingsModal').classList.remove('active');
+  $('fileImportAppData').click();
+});
+
+safeAdd('fileImportAppData', 'change', function(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  importAppData(file);
+  e.target.value = ''; // Reset input
+});
 safeAdd('menuBackup', 'click', function() {
   var data = {
     _meta: { appName: appSettings.appName, user: currentUser ? currentUser.nama : '', deviceId: getDeviceId(), exported: new Date().toISOString() },
@@ -5143,6 +5176,112 @@ function openEditAppModal() {
   renderPresets();
   $('editAppModal').classList.add('active');
 }
+
+  // ============================================================
+// EXPORT & IMPORT DATA APLIKASI (BACKUP APK SETUP)
+// ============================================================
+function exportAppData() {
+  try {
+    var exportData = {
+      _meta: {
+        appName: appSettings.appName,
+        version: 'v33.0',
+        exportedAt: new Date().toISOString(),
+        exportedBy: currentUser ? currentUser.nama : 'Guest',
+        format: 'kasen-app-backup'
+      },
+      // Semua Data Konfigurasi & Menu
+      settings: appSettings,
+      toko: toko,
+      printerConfig: printerConfig,
+      platforms: PLATFORMS,
+      categories: CATEGORIES,
+      products: PRODUCTS,
+      users: USERS, // Ikutkan PIN kasir agar tidak perlu setting ulang
+      // Optional: Data transaksi bisa disembunyikan atau disertakan
+      // Kita sertakan agar benar-benar full backup
+      transactions: TRANSACTIONS,
+      expenses: EXPENSES,
+      sessions: SESSIONS,
+      archiveSessions: ARCHIVE_SESSIONS,
+      closings: CLOSINGS
+    };
+
+    var jsonStr = JSON.stringify(exportData, null, 2);
+    var blob = new Blob([jsonStr], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'kasen-appdata-' + todayISO() + '.kasen';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast('Data Aplikasi berhasil disimpan!', 'success');
+    log('Export app data berhasil');
+  } catch (err) {
+    toast('Gagal export: ' + err.message, 'error');
+  }
+}
+
+function importAppData(file) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      
+      // Validasi Format
+      if (!data._meta || data._meta.format !== 'kasen-app-backup') {
+        throw new Error('Format file tidak valid. Pastikan file .kasen dari aplikasi ini.');
+      }
+
+      // Konfirmasi Timpa Data
+      customConfirm(
+        '⚠️ PERINGATAN!\n\nMengupload data aplikasi akan MENGGANTI seluruh data menu, produk, setingan, dan transaksi saat ini.\n\nData saat ini akan ditimpa oleh file upload.\n\nYakin ingin melanjutkan?',
+        'Konfirmasi Uplod Data',
+        '📥', 'Ya, Timpa Data', 'Batal', 'btn-warning'
+      ).then(function(ok) {
+        if (!ok) return;
+
+        // Lakukan proses restore
+        if (data.settings) { appSettings = data.settings; saveAppSettings(); }
+        if (data.toko) { toko = data.toko; saveToko(); }
+        if (data.printerConfig) { printerConfig = data.printerConfig; savePrinterConfig(); }
+        if (data.platforms) { PLATFORMS = data.platforms; savePlatforms(); }
+        if (data.categories) { CATEGORIES = data.categories; saveCats(); }
+        if (data.products) { PRODUCTS = data.products; saveProducts(); }
+        if (data.users) { USERS = data.users; saveLS('kasen_users', USERS); }
+        
+        if (data.transactions) { TRANSACTIONS = data.transactions; saveTransactions(); }
+        if (data.expenses) { EXPENSES = data.expenses; saveExpenses(); }
+        if (data.sessions) { SESSIONS = data.sessions; saveSessions(); }
+        if (data.archiveSessions) { ARCHIVE_SESSIONS = data.archiveSessions; saveArchiveSessions(); }
+        if (data.closings) { CLOSINGS = data.closings; saveClosings(); }
+
+        // Terapkan Tema Baru & Reload Data
+        applyTheme();
+        loadUserData(); // Reload cache dari localStorage
+        initAllCustomDD(); // Re-init dropdown custom
+        renderAll();
+        
+        // Tutup modal & Logout paksa agar setingan bersih
+        $('settingsModal').classList.remove('active');
+        
+        customAlert('Data aplikasi berhasil di-upload.\n\nAplikasi akan dimuat ulang untuk menerapkan perubahan.', 'Sukses', '✅').then(function(){
+            location.reload();
+        });
+
+      });
+    } catch (err) {
+      customAlert('Gagal import data:\n' + err.message, 'Error', '❌');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ============================================================
+// PWA
 
 // ============================================================
 // PWA
