@@ -69,46 +69,20 @@
   h3 { font-size:var(--font-size-h3); margin-bottom:14px; }
   h4 { font-size:var(--font-size-small); color:var(--muted); text-transform:uppercase; letter-spacing:.6px; margin:16px 0 8px; font-weight:600; }
 
-  /* ✅ CUSTOM DROPDOWN STYLING GLOBAL */
   select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: var(--card);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 36px 10px 14px;
-    font-size: 13px;
-    font-family: inherit;
-    color: var(--text);
+    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+    background-color: var(--card); border: 2px solid var(--border); border-radius: 10px;
+    padding: 10px 36px 10px 14px; font-size: 13px; font-family: inherit; color: var(--text);
     cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 16px;
-    transition: all 0.2s ease;
-    font-weight: 600;
-    box-shadow: var(--shadow);
-    width: 100%;
+    background-repeat: no-repeat; background-position: right 12px center; background-size: 16px;
+    transition: all 0.2s ease; font-weight: 600; box-shadow: var(--shadow); width: 100%;
   }
-  select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px var(--primary-soft);
-  }
-  select:hover {
-    border-color: var(--primary);
-    background-color: var(--primary-soft);
-    transform: translateY(-1px);
-  }
-  body.dark select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  }
-  body.dark select:hover {
-    background-color: rgba(96,165,250,.15);
-  }
+  select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+  select:hover { border-color: var(--primary); background-color: var(--primary-soft); transform: translateY(-1px); }
+  body.dark select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+  body.dark select:hover { background-color: rgba(96,165,250,.15); }
 
-  /* ✅ CUSTOM MODAL STYLING */
   .custom-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:1000; align-items:center; justify-content:center; padding:16px; backdrop-filter: blur(3px); }
   .custom-modal-overlay.active { display:flex; }
   .custom-modal-content { background:var(--card); border-radius:20px; width:100%; max-width:380px; padding:24px; box-shadow:0 25px 50px -12px rgba(0,0,0,.4); text-align:center; border:1px solid var(--border); animation: modalPop .3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -248,9 +222,7 @@
   .summary-card .value.red { color:var(--danger); }
 
   .summary-grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-  @media (min-width: 600px) {
-    .summary-grid-4 { grid-template-columns: repeat(4, 1fr) !important; }
-  }
+  @media (min-width: 600px) { .summary-grid-4 { grid-template-columns: repeat(4, 1fr) !important; } }
 
   .stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:12px; text-align:center; }
   .stat-card .label { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
@@ -465,7 +437,6 @@
     .finance-card .fc-value { font-size:12px; }
   }
 
-  /* FONT SCALE OVERRIDE */
   :root {
     --fs-tiny:  calc(var(--font-size-small) - 1px);
     --fs-nano:  calc(var(--font-size-small) - 2px);
@@ -550,7 +521,6 @@
     .finance-card .fc-value { font-size: var(--font-size) !important; }
   }
 
-  /* ROLE-BASED UI GATING */
   body.role-crew [data-role-lock="leader"] { display: none !important; }
   body.role-crew #btnAddProduct,
   body.role-crew #btnAddCat,
@@ -565,131 +535,75 @@
   body.role-crew button[data-act="edit"],
   body.role-crew button[data-act="del"] { display: none !important; }
 
-  /* SAFETY NET */
   .drawer-bg:not(.active) { display: none !important; }
   .drawer-bg:not(.active) .drawer { transform: translateX(100%) !important; }
   .tab-content:not(.active) { display: none !important; }
   .tab-content.active { display: block !important; }
 
-  /* CLOUD INDICATOR */
   #cloudIndicator { cursor: pointer !important; }
   #cloudIndicator:active { background: var(--bg); }
 
+  .custom-dd { position: relative; width: 100%; font-family: inherit; }
+  .custom-dd-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 10px 14px; background-color: var(--card); border: 2px solid var(--border); border-radius: 10px;
+    font-size: 13px; font-family: inherit; font-weight: 600; color: var(--text); cursor: pointer;
+    text-align: left; transition: all 0.2s ease; box-shadow: var(--shadow);
+  }
+  .custom-dd-trigger:hover { border-color: var(--primary); background-color: var(--primary-soft); }
+  .custom-dd-trigger.open { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+  .custom-dd-trigger .dd-arrow { flex-shrink: 0; font-size: 11px; color: var(--muted); transition: transform .2s; }
+  .custom-dd-trigger.open .dd-arrow { transform: rotate(180deg); }
+  .custom-dd-trigger .dd-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .custom-dd-menu {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 15px 35px -5px rgba(0,0,0,.25);
+    z-index: 300; max-height: 280px; overflow-y: auto; padding: 6px; display: none;
+    animation: ddSlide .18s ease;
+  }
+  .custom-dd-menu.show { display: block; }
+  @keyframes ddSlide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .custom-dd-item {
+    display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 8px;
+    font-size: 13px; font-family: inherit; font-weight: 500; color: var(--text); cursor: pointer;
+    transition: background-color .12s, color .12s; text-align: left;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .custom-dd-item:hover { background-color: var(--primary-soft); color: var(--primary); }
+  .custom-dd-item.selected { background-color: var(--primary); color: #fff; font-weight: 700; }
+  .custom-dd-item.selected:hover { background-color: var(--primary); color: #fff; }
+  .custom-dd-item .dd-check { margin-left: auto; font-size: 14px; opacity: 0; }
+  .custom-dd-item.selected .dd-check { opacity: 1; }
+  .custom-dd-group {
+    padding: 8px 10px 4px; font-size: 10px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .6px; color: var(--muted);
+  }
   /* ============================================================
-   ✅ CUSTOM DROPDOWN (Ganti Select Native)
+   RIWAYAT 2-COLUMN LAYOUT
    ============================================================ */
-.custom-dd {
-  position: relative;
-  width: 100%;
-  font-family: inherit;
+.riwayat-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
 }
-.custom-dd-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 14px;
-  background-color: var(--card);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-size: 13px;
-  font-family: inherit;
-  font-weight: 600;
-  color: var(--text);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow);
+@media (min-width: 900px) {
+  .riwayat-layout { grid-template-columns: minmax(0, 1fr) 380px; align-items: start; }
+  .riwayat-detail-col { position: sticky; top: 14px; }
 }
-.custom-dd-trigger:hover {
-  border-color: var(--primary);
-  background-color: var(--primary-soft);
-}
-.custom-dd-trigger.open {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--primary-soft);
-}
-.custom-dd-trigger .dd-arrow {
-  flex-shrink: 0;
-  font-size: 11px;
-  color: var(--muted);
-  transition: transform .2s;
-}
-.custom-dd-trigger.open .dd-arrow { transform: rotate(180deg); }
-.custom-dd-trigger .dd-text {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+.riwayat-list-col > .card { margin-bottom: 14px; }
 
-.custom-dd-menu {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 15px 35px -5px rgba(0,0,0,.25);
-  z-index: 300;
-  max-height: 280px;
-  overflow-y: auto;
-  padding: 6px;
-  display: none;
-  animation: ddSlide .18s ease;
+/* Highlight transaksi terpilih */
+.trx-row.is-selected {
+  background: var(--primary-soft);
+  border: 1px solid var(--primary);
 }
-.custom-dd-menu.show { display: block; }
-@keyframes ddSlide {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.custom-dd-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-family: inherit;
-  font-weight: 500;
-  color: var(--text);
-  cursor: pointer;
-  transition: background-color .12s, color .12s;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.custom-dd-item:hover {
-  background-color: var(--primary-soft);
-  color: var(--primary);
-}
-.custom-dd-item.selected {
-  background-color: var(--primary);
-  color: #fff;
-  font-weight: 700;
-}
-.custom-dd-item.selected:hover {
-  background-color: var(--primary);
-  color: #fff;
-}
-.custom-dd-item .dd-check {
-  margin-left: auto;
-  font-size: 14px;
-  opacity: 0;
-}
-.custom-dd-item.selected .dd-check { opacity: 1; }
+.trx-row .trx-info { cursor: pointer; }
+.trx-row .trx-info:hover .trx-id { color: var(--primary); }
 
-.custom-dd-group {
-  padding: 8px 10px 4px;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .6px;
-  color: var(--muted);
+/* Mobile: detail collapsible */
+@media (max-width: 899px) {
+  .riwayat-detail-col { position: static; }
+  #trxDetailPanel { position: static !important; }
 }
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -706,6 +620,8 @@
     <div id="modePin" style="display:none;">
       <div class="pin-display" id="pinDisplay"></div>
       <div class="login-error" id="loginError"></div>
+      <!-- ✅ Info status cloud -->
+      <div id="loginCloudInfo" style="font-size:11px;color:var(--muted);margin-bottom:8px;text-align:center;"></div>
       <div class="pin-pad" id="pinPad">
         <button class="pin-key" data-d="1">1</button><button class="pin-key" data-d="2">2</button><button class="pin-key" data-d="3">3</button>
         <button class="pin-key" data-d="4">4</button><button class="pin-key" data-d="5">5</button><button class="pin-key" data-d="6">6</button>
@@ -714,7 +630,6 @@
         <button class="pin-key" data-d="0">0</button>
         <button class="pin-key action del" data-action="del">⌫</button>
       </div>
-      <!-- ✅ Opsi login cepat tanpa PIN -->
       <div style="margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--bg);border-radius:var(--radius);">
         <input type="checkbox" id="chkQuickLogin" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
         <label for="chkQuickLogin" style="font-size:12px;color:var(--text);cursor:pointer;font-weight:600;">⚡ Login cepat (tidak perlu PIN)</label>
@@ -730,7 +645,14 @@
   <button class="btn-icon" id="cloudIndicator" style="cursor:default;font-size:14px;" title="Cloud status">☁️</button>
   <button class="btn-icon" id="btnHamburger" title="Menu">☰</button>
 </div>
-
+<!-- ✅ Info lokasi/outlet -->
+<div id="headerLocation" style="display:none;align-items:center;gap:6px;padding:8px 12px;margin-bottom:10px;background:var(--primary-soft);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;font-weight:600;">
+  <span style="font-size:16px;">📍</span>
+  <div style="flex:1;min-width:0;">
+    <div id="headerLocationTitle" style="color:var(--text);">-</div>
+    <div id="headerLocationSub" style="font-size:10px;color:var(--muted);margin-top:1px;font-weight:500;">-</div>
+  </div>
+</div>
 <!-- DRAWER MENU -->
 <div class="drawer-bg" id="drawerBg">
   <div class="drawer">
@@ -823,7 +745,6 @@
     </div>
   </div>
 </div>
-
 <!-- TAB PRODUK -->
 <div class="tab-content" id="tab-produk">
   <div class="card" data-role-lock="leader">
@@ -860,34 +781,49 @@
 
 <!-- TAB RIWAYAT -->
 <div class="tab-content" id="tab-riwayat">
-  <div class="card">
-    <div class="card-header"><h2>📊 Riwayat Transaksi</h2><button class="btn btn-danger btn-sm" id="btnClearHistory">Hapus Aktif</button></div>
-    <div class="form-group">
-      <label>📅 Pilih Sesi</label>
-      <select id="trxSessionSelect"></select>
+  <div class="riwayat-layout">
+    <!-- KOLOM KIRI: daftar transaksi -->
+    <div class="riwayat-list-col">
+      <div class="card">
+        <div class="card-header"><h2>📊 Riwayat Transaksi</h2><button class="btn btn-danger btn-sm" id="btnClearHistory">Hapus Aktif</button></div>
+        <div class="form-group">
+          <label>📅 Pilih Sesi</label>
+          <select id="trxSessionSelect"></select>
+        </div>
+        <div id="trxSessionBanner"></div>
+        <div class="filter-row" id="trxFilter">
+          <button class="btn active" data-filter="today">Hari Ini</button>
+          <button class="btn" data-filter="week">7 Hari</button>
+          <button class="btn" data-filter="month">Bulan Ini</button>
+          <button class="btn" data-filter="all">Semua</button>
+        </div>
+        <div class="summary-grid summary-grid-4">
+          <div class="summary-card"><div class="label">Jumlah Trx</div><div class="value" id="sumTrxCount">0</div></div>
+          <div class="summary-card"><div class="label">💵 Tunai</div><div class="value" id="sumTrxTunai">Rp 0</div></div>
+          <div class="summary-card"><div class="label">💳 Non Tunai</div><div class="value" id="sumTrxNonTunai">Rp 0</div></div>
+          <div class="summary-card"><div class="label">💰 Total</div><div class="value green" id="sumTrxTotal">Rp 0</div></div>
+        </div>
+        <div id="trxList"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>🔒 Riwayat Tutup Toko</h2></div>
+        <div id="closingsList"></div>
+      </div>
     </div>
-    <div id="trxSessionBanner"></div>
-    <div class="filter-row" id="trxFilter">
-      <button class="btn active" data-filter="today">Hari Ini</button>
-      <button class="btn" data-filter="week">7 Hari</button>
-      <button class="btn" data-filter="month">Bulan Ini</button>
-      <button class="btn" data-filter="all">Semua</button>
+
+    <!-- KOLOM KANAN: detail transaksi terpilih -->
+    <div class="riwayat-detail-col">
+      <div class="card" id="trxDetailPanel" style="position:sticky;top:14px;">
+        <div class="card-header"><h2>📄 Detail Transaksi</h2></div>
+        <div id="trxDetailBody">
+          <div class="empty" style="padding:30px 10px;">
+            👈 Klik transaksi di sebelah kiri untuk melihat detail
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- ✅ 4 kartu ringkasan: Jumlah Trx • Tunai • Non Tunai • Total -->
-    <div class="summary-grid summary-grid-4">
-      <div class="summary-card"><div class="label">Jumlah Trx</div><div class="value" id="sumTrxCount">0</div></div>
-      <div class="summary-card"><div class="label">💵 Tunai</div><div class="value" id="sumTrxTunai">Rp 0</div></div>
-      <div class="summary-card"><div class="label">💳 Non Tunai</div><div class="value" id="sumTrxNonTunai">Rp 0</div></div>
-      <div class="summary-card"><div class="label">💰 Total</div><div class="value green" id="sumTrxTotal">Rp 0</div></div>
-    </div>
-    <div id="trxList"></div>
-  </div>
-  <div class="card">
-    <div class="card-header"><h2>🔒 Riwayat Tutup Toko</h2></div>
-    <div id="closingsList"></div>
   </div>
 </div>
-
 <!-- TAB REKAP -->
 <div class="tab-content" id="tab-rekap">
   <div class="card">
@@ -945,7 +881,6 @@
   <div id="tokoFinanceGrid"></div>
   <div id="tutupTokoSection"></div>
   
-  <!-- Info Toko (Leader only) -->
   <div class="card" data-role-lock="leader">
     <div class="card-header"><h2>🏪 Info Toko</h2></div>
     <div class="form-group"><label>Nama Toko</label><input type="text" id="inpNamaToko"></div>
@@ -959,7 +894,6 @@
     <button class="btn btn-success btn-block" style="padding:12px;" id="btnSaveToko">💾 Simpan</button>
   </div>
 
-  <!-- Pengeluaran (Bisa diakses Crew) -->
   <div class="card">
     <div class="card-header"><h2>💸 Pengeluaran</h2><button class="btn btn-primary btn-sm" id="btnAddExpense">+ Tambah</button></div>
     <div class="form-group"><label>Filter Bulan</label><input type="month" id="filterBulanExpense"></div>
@@ -1241,7 +1175,6 @@
       <div class="menu-icon">💾</div>
       <div class="menu-info"><div class="menu-title">Backup Data</div><div class="menu-desc">Export JSON device ini</div></div>
     </button>
-<!-- ✅ FITUR BARU: EXPORT & IMPORT DATA APLIKASI -->
 <button class="menu-item" id="menuExportAppData" data-role-lock="leader">
   <div class="menu-icon">📤</div>
   <div class="menu-info">
@@ -1257,7 +1190,6 @@
   </div>
 </button>
     <input type="file" id="fileImportAppData" accept=".kasen,application/json" style="display:none;">
-<!-- END FITUR BARU -->
     <button class="menu-item" id="menuAbout">
       <div class="menu-icon">ℹ️</div>
       <div class="menu-info"><div class="menu-title">Tentang</div><div class="menu-desc">Versi & info</div></div>
@@ -1266,6 +1198,13 @@
       <div class="menu-icon">🚪</div>
       <div class="menu-info"><div class="menu-title">Logout</div><div class="menu-desc">Keluar dari akun ini</div></div>
     </button>
+    <button class="menu-item" id="menuResetDeviceLock" data-role-lock="leader" style="background:var(--bg);">
+  <div class="menu-icon">🔓</div>
+  <div class="menu-info">
+    <div class="menu-title">Reset Device Lock</div>
+    <div class="menu-desc">Buka kunci akun yang terkunci di device lain</div>
+  </div>
+</button>
     <button class="menu-item danger" id="menuReset" data-role-lock="leader">
       <div class="menu-icon">🗑️</div>
       <div class="menu-info"><div class="menu-title">Reset Data</div><div class="menu-desc">Hapus semua data device ini</div></div>
@@ -1422,20 +1361,17 @@
   </div>
 </div></div>
 
-<!-- ✅ CUSTOM MODAL (Pengganti Alert/Confirm) -->
+<!-- CUSTOM MODAL -->
 <div class="custom-modal-overlay" id="customModal">
   <div class="custom-modal-content">
     <div class="custom-modal-icon" id="customModalIcon">⚠️</div>
     <div class="custom-modal-title" id="customModalTitle">Konfirmasi</div>
     <div class="custom-modal-msg" id="customModalMsg">Apakah Anda yakin?</div>
-    <div class="custom-modal-actions" id="customModalActions">
-       <!-- Buttons injected by JS -->
-    </div>
+    <div class="custom-modal-actions" id="customModalActions"></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-
 <script>
 // ============================================================
 // KONFIG
@@ -1534,31 +1470,20 @@ var SYNC_CONFIG = { autoSyncThreshold: 80, warnThreshold: 70 };
 function initCustomDropdown(nativeSelect) {
   if (!nativeSelect || nativeSelect._isCustomDD) return;
   nativeSelect._isCustomDD = true;
-
-  // Sembunyikan select asli
   nativeSelect.style.display = 'none';
-
-  // Buat wrapper
   var wrap = document.createElement('div');
   wrap.className = 'custom-dd';
   wrap.style.marginBottom = '0';
-
-  // Trigger button
   var trigger = document.createElement('button');
   trigger.type = 'button';
   trigger.className = 'custom-dd-trigger';
   trigger.innerHTML = '<span class="dd-text"></span><span class="dd-arrow">▼</span>';
-
-  // Menu
   var menu = document.createElement('div');
   menu.className = 'custom-dd-menu';
-
   wrap.appendChild(trigger);
   wrap.appendChild(menu);
   nativeSelect.parentNode.insertBefore(wrap, nativeSelect.nextSibling);
-
   var currentValue = nativeSelect.value;
-
   function renderMenu() {
     menu.innerHTML = '';
     Array.from(nativeSelect.children).forEach(function(child) {
@@ -1567,15 +1492,12 @@ function initCustomDropdown(nativeSelect) {
         grp.className = 'custom-dd-group';
         grp.textContent = child.label;
         menu.appendChild(grp);
-        Array.from(child.children).forEach(function(opt) {
-          menu.appendChild(createItem(opt));
-        });
+        Array.from(child.children).forEach(function(opt) { menu.appendChild(createItem(opt)); });
       } else if (child.tagName === 'OPTION') {
         menu.appendChild(createItem(child));
       }
     });
   }
-
   function createItem(opt) {
     var item = document.createElement('div');
     item.className = 'custom-dd-item' + (opt.value === currentValue ? ' selected' : '');
@@ -1590,45 +1512,27 @@ function initCustomDropdown(nativeSelect) {
     });
     return item;
   }
-
   function updateTriggerText() {
     var sel = nativeSelect.options[nativeSelect.selectedIndex];
     trigger.querySelector('.dd-text').textContent = sel ? sel.textContent : '— Pilih —';
   }
-
-  function openMenu() {
-    closeAllCustomDD();
-    renderMenu();
-    menu.classList.add('show');
-    trigger.classList.add('open');
-  }
-  function closeMenu() {
-    menu.classList.remove('show');
-    trigger.classList.remove('open');
-  }
-
+  function openMenu() { closeAllCustomDD(); renderMenu(); menu.classList.add('show'); trigger.classList.add('open'); }
+  function closeMenu() { menu.classList.remove('show'); trigger.classList.remove('open'); }
   trigger.addEventListener('click', function(e) {
     e.stopPropagation();
-    if (menu.classList.contains('show')) closeMenu();
-    else openMenu();
+    if (menu.classList.contains('show')) closeMenu(); else openMenu();
   });
-
-  // Sync saat native select berubah (misal via JS)
   nativeSelect.addEventListener('change', function() {
     currentValue = nativeSelect.value;
     updateTriggerText();
   });
-
-  // Observe perubahan options
   var observer = new MutationObserver(function() {
     updateTriggerText();
     if (menu.classList.contains('show')) renderMenu();
   });
   observer.observe(nativeSelect, { childList: true, subtree: true, characterData: true });
-
   updateTriggerText();
 }
-
 function closeAllCustomDD() {
   document.querySelectorAll('.custom-dd-menu.show').forEach(function(m) {
     m.classList.remove('show');
@@ -1636,20 +1540,11 @@ function closeAllCustomDD() {
     if (trg) trg.classList.remove('open');
   });
 }
-
-// Tutup semua saat klik di luar
-document.addEventListener('click', function() {
-  closeAllCustomDD();
-});
-
-// Inisialisasi semua select saat load
+document.addEventListener('click', function() { closeAllCustomDD(); });
 function initAllCustomDD() {
-  document.querySelectorAll('select').forEach(function(sel) {
-    initCustomDropdown(sel);
-  });
+  document.querySelectorAll('select').forEach(function(sel) { initCustomDropdown(sel); });
 }
 
-  
 // ============================================================
 // STATE
 // ============================================================
@@ -1709,6 +1604,12 @@ var CLOUD_DEVICE_KEY = 'kasen_device_id';
 var CLOUD_PENDING_KEY = 'kasen_pending_uploads';
 var CLOUD_LAST_SYNC_KEY = 'kasen_cloud_last_sync';
 
+// ✅ PATCH LOGIN: CLOUD USERS
+var CLOUD_USERS_KEY = 'kasen_cloud_users_cache';
+var cloudUsers = [];
+var usersUnsubscribe = null;
+// END PATCH LOGIN
+
 // ============================================================
 // UTIL
 // ============================================================
@@ -1765,7 +1666,9 @@ function updatePaymentModeUI() {
 // ============================================================
 // CUSTOM MODAL (ALERT & CONFIRM)
 // ============================================================
-function customAlert(msg, title = 'Informasi', icon = 'ℹ️') {
+function customAlert(msg, title, icon) {
+  if (title === undefined) title = 'Informasi';
+  if (icon === undefined) icon = 'ℹ️';
   return new Promise(function(resolve) {
     $('customModalIcon').textContent = icon;
     $('customModalTitle').textContent = title;
@@ -1778,16 +1681,19 @@ function customAlert(msg, title = 'Informasi', icon = 'ℹ️') {
     };
   });
 }
-
-function customConfirm(msg, title = 'Konfirmasi', icon = '⚠️', confirmText = 'Ya', cancelText = 'Batal', confirmClass = 'btn-danger') {
+function customConfirm(msg, title, icon, confirmText, cancelText, confirmClass) {
+  if (title === undefined) title = 'Konfirmasi';
+  if (icon === undefined) icon = '⚠️';
+  if (confirmText === undefined) confirmText = 'Ya';
+  if (cancelText === undefined) cancelText = 'Batal';
+  if (confirmClass === undefined) confirmClass = 'btn-danger';
   return new Promise(function(resolve) {
     $('customModalIcon').textContent = icon;
     $('customModalTitle').textContent = title;
     $('customModalMsg').textContent = msg;
-    $('customModalActions').innerHTML = `
-      <button class="btn btn-ghost" id="btnCustomModalCancel">${cancelText}</button>
-      <button class="btn ${confirmClass}" id="btnCustomModalConfirm">${confirmText}</button>
-    `;
+    $('customModalActions').innerHTML =
+      '<button class="btn btn-ghost" id="btnCustomModalCancel">' + cancelText + '</button>' +
+      '<button class="btn ' + confirmClass + '" id="btnCustomModalConfirm">' + confirmText + '</button>';
     $('customModal').classList.add('active');
     $('btnCustomModalCancel').onclick = function() {
       $('customModal').classList.remove('active');
@@ -1823,6 +1729,60 @@ function applyRoleUI() {
   }
 }
 
+  // ============================================================
+// HEADER LOCATION (info outlet)
+// ============================================================
+function renderHeaderLocation() {
+  var wrap = $('headerLocation');
+  if (!wrap) return;
+  if (!currentUser) { wrap.style.display = 'none'; return; }
+  var area = currentUser.areaNama || '';
+  var outlet = currentUser.outletNama || '';
+  if (!area && !outlet) {
+    wrap.style.display = 'flex';
+    $('headerLocationTitle').innerHTML = '⚠️ <span style="color:var(--danger);">Belum ditugaskan ke outlet</span>';
+    $('headerLocationSub').textContent = 'Hubungi Leader untuk assign outlet';
+    return;
+  }
+  wrap.style.display = 'flex';
+  $('headerLocationTitle').innerHTML = '📍 ' + escapeHtml(outlet || '(tanpa outlet)');
+  $('headerLocationSub').textContent = (area ? '🏪 ' + area : '') + (currentUser.nama ? ' • 👤 ' + currentUser.nama : '');
+}
+// ============================================================
+// DEVICE LOCK (akun terikat ke 1 device)
+// ============================================================
+var ACCOUNT_DEVICE_KEY = 'kasen_account_device_map'; // { [userId]: deviceId }
+
+function getAccountDeviceMap() {
+  return loadLS(ACCOUNT_DEVICE_KEY, {}) || {};
+}
+function saveAccountDeviceMap(map) {
+  saveLS(ACCOUNT_DEVICE_KEY, map);
+}
+
+/**
+ * Cek apakah akun boleh login di device ini.
+ * - Kalau belum pernah login di device manapun → izinkan & kunci ke device ini
+ * - Kalau sudah terkunci ke device ini → izinkan
+ * - Kalau terkunci ke device lain → tolak
+ * Return: { allowed: bool, reason: string, boundDeviceId: string }
+ */
+function checkAccountDevice(userId) {
+  var myDevice = getDeviceId();
+  var map = getAccountDeviceMap();
+  var bound = map[userId];
+  if (!bound) {
+    // Pertama kali → kunci ke device ini
+    map[userId] = myDevice;
+    saveAccountDeviceMap(map);
+    return { allowed: true, reason: 'first-bind', boundDeviceId: myDevice };
+  }
+  if (bound === myDevice) {
+    return { allowed: true, reason: 'same-device', boundDeviceId: bound };
+  }
+  return { allowed: false, reason: 'other-device', boundDeviceId: bound };
+}
+  
 // ============================================================
 // LOCALSTORAGE
 // ============================================================
@@ -1857,14 +1817,11 @@ function migrateToDeviceWide() {
   var allUsers = loadLS('kasen_users', []) || [];
   var keysToMerge = ['toko','categories','products','transactions','expenses','closings','archive_sessions','platforms','sessions'];
   var migratedSummary = [];
-
   keysToMerge.forEach(function(k) {
     var existing = loadLS('kasen_' + k, null);
     if (existing !== null && existing !== undefined && !(Array.isArray(existing) && existing.length === 0)) return;
-
     var combined = null;
     var sourceCount = 0;
-
     allUsers.forEach(function(u) {
       var data = loadLS('kasen_' + u.id + '_' + k, null);
       if (data === null || data === undefined) return;
@@ -1877,13 +1834,11 @@ function migrateToDeviceWide() {
         else combined = Object.assign({}, combined, data);
       }
     });
-
     if (combined !== null && (!Array.isArray(combined) || combined.length > 0)) {
       saveLS('kasen_' + k, combined);
       migratedSummary.push(k + '(' + sourceCount + ' user)');
     }
   });
-
   saveLS('kasen_migrated_v27', true);
   if (migratedSummary.length > 0) console.log('✅ Migrasi device-wide selesai:', migratedSummary.join(', '));
 }
@@ -1910,6 +1865,12 @@ function initCloud() {
     cloudReady = true;
     updateCloudIndicator('synced');
     console.log('☁️ Firebase ready');
+
+    // ✅ PATCH LOGIN: Ambil daftar akun dari Firebase + listen realtime
+    loadCloudUsers().then(function() {
+      listenCloudUsersRealtime();
+    });
+
     return true;
   } catch (e) {
     console.error('Init Firebase gagal:', e);
@@ -1917,6 +1878,101 @@ function initCloud() {
     return false;
   }
 }
+
+// ============================================================
+// ✅ PATCH LOGIN: LOAD USERS FROM CLOUD
+// ============================================================
+function loadCloudUsers() {
+  if (!db || !cloudReady) {
+    cloudUsers = loadLS(CLOUD_USERS_KEY, []) || [];
+    updateLoginCloudInfo();
+    return Promise.resolve(cloudUsers);
+  }
+  return db.collection('kasen_users').get()
+    .then(function(snap) {
+      var list = [];
+      snap.forEach(function(doc) {
+        var d = doc.data() || {};
+        if (!d.nama || !d.pin) return;
+        list.push({
+          id: doc.id,
+          nama: d.nama,
+          role: d.role || 'crew',
+          pin: String(d.pin),
+          areaId: d.areaId || '',
+          areaNama: d.areaNama || '',
+          outletId: d.outletId || '',
+          outletNama: d.outletNama || '',
+          created: d.created || null
+        });
+      });
+      cloudUsers = list;
+      try { localStorage.setItem(CLOUD_USERS_KEY, JSON.stringify(list)); } catch(e) {}
+      // Sinkron juga ke kasen_users supaya fitur lain (kalau ada) tetap jalan
+      try { saveLS('kasen_users', list); } catch(e) {}
+      updateLoginCloudInfo();
+      console.log('☁️ Loaded ' + list.length + ' user dari cloud');
+      return list;
+    })
+    .catch(function(err) {
+      console.warn('loadCloudUsers gagal:', err.message);
+      cloudUsers = loadLS(CLOUD_USERS_KEY, []) || [];
+      updateLoginCloudInfo();
+      return cloudUsers;
+    });
+}
+
+function listenCloudUsersRealtime() {
+  if (!db || !cloudReady) return;
+  if (usersUnsubscribe) usersUnsubscribe();
+  usersUnsubscribe = db.collection('kasen_users').onSnapshot(function(snap) {
+    var list = [];
+    snap.forEach(function(doc) {
+      var d = doc.data() || {};
+      if (!d.nama || !d.pin) return;
+      list.push({
+        id: doc.id,
+        nama: d.nama,
+        role: d.role || 'crew',
+        pin: String(d.pin),
+        areaId: d.areaId || '',
+        areaNama: d.areaNama || '',
+        outletId: d.outletId || '',
+        outletNama: d.outletNama || '',
+        created: d.created || null
+      });
+    });
+    cloudUsers = list;
+    try { localStorage.setItem(CLOUD_USERS_KEY, JSON.stringify(list)); } catch(e) {}
+    try { saveLS('kasen_users', list); } catch(e) {}
+    updateLoginCloudInfo();
+    // Kalau sedang di layar login, refresh daftar USERS agar PIN baru langsung bisa dipakai
+    if ($('loginScreen') && $('loginScreen').classList.contains('active')) {
+      USERS = cloudUsers.slice();
+    }
+  }, function(err) {
+    console.warn('listenCloudUsers error:', err.message);
+  });
+}
+
+function updateLoginCloudInfo() {
+  var info = $('loginCloudInfo');
+  if (!info) return;
+  var pool = (cloudUsers.length > 0) ? cloudUsers : (loadLS(CLOUD_USERS_KEY, []) || []);
+  if (!cloudReady) {
+    info.innerHTML = pool.length > 0
+      ? '💤 Offline — ' + pool.length + ' akun (cache)'
+      : '💤 Offline — belum ada akun tersimpan';
+    info.style.color = pool.length > 0 ? 'var(--muted)' : 'var(--danger)';
+  } else if (pool.length === 0) {
+    info.innerHTML = '⏳ Memuat akun dari cloud...';
+    info.style.color = 'var(--warning)';
+  } else {
+    info.innerHTML = '☁️ ' + pool.length + ' akun tersedia';
+    info.style.color = 'var(--success)';
+  }
+}
+// END PATCH LOGIN
 
 function getDeviceId() {
   var id = localStorage.getItem(CLOUD_DEVICE_KEY);
@@ -2045,29 +2101,17 @@ function getPendingCount() {
 function renderCloudModal() {
   var did = getDeviceId();
   var didEl = $('cloudDeviceId'); if (didEl) didEl.textContent = did;
-
   var statusEl = $('cloudStatusLabel');
   var pending = getPendingCount();
   if (statusEl) {
-    if (!cloudReady) {
-      statusEl.textContent = '💤 Offline';
-      statusEl.style.color = 'var(--muted)';
-    } else if (pending > 0) {
-      statusEl.textContent = '⏳ ' + pending + ' pending';
-      statusEl.style.color = 'var(--warning)';
-    } else {
-      statusEl.textContent = '✅ Terhubung';
-      statusEl.style.color = 'var(--success)';
-    }
+    if (!cloudReady) { statusEl.textContent = '💤 Offline'; statusEl.style.color = 'var(--muted)'; }
+    else if (pending > 0) { statusEl.textContent = '⏳ ' + pending + ' pending'; statusEl.style.color = 'var(--warning)'; }
+    else { statusEl.textContent = '✅ Terhubung'; statusEl.style.color = 'var(--success)'; }
   }
-
-  var pcEl = $('cloudPendingCount');
-  if (pcEl) pcEl.textContent = pending;
-
+  var pcEl = $('cloudPendingCount'); if (pcEl) pcEl.textContent = pending;
   var lsEl = $('cloudLastSync');
   var lastSync = localStorage.getItem(CLOUD_LAST_SYNC_KEY);
   if (lsEl) lsEl.textContent = lastSync ? new Date(parseInt(lastSync)).toLocaleString('id-ID') : 'Belum pernah';
-
   var listEl = $('cloudUploadList');
   if (listEl) {
     var recent = ARCHIVE_SESSIONS.slice(0, 5);
@@ -2110,10 +2154,8 @@ function saveArchiveSessions() { saveLS(userKey('archive_sessions'), ARCHIVE_SES
 function loadUserData() {
   var t = loadLS(userKey('toko'), null);
   toko = t ? Object.assign({}, DEFAULT_TOKO, t) : Object.assign({}, DEFAULT_TOKO);
-  
   var pc = loadLS('kasen_printer_config', null);
   printerConfig = pc ? Object.assign({}, DEFAULT_PRINTER_CONFIG, pc) : Object.assign({}, DEFAULT_PRINTER_CONFIG);
-  
   loadPlatforms();
   var cats = loadLS(userKey('categories'), null);
   CATEGORIES = (cats && cats.length) ? cats : JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
@@ -2324,15 +2366,11 @@ function startSession() {
   trxSessionFilter = '__active__';
   renderRekapSessionSelect();
   updateRekapDateFilterVisibility();
-  initAllCustomDD();   // ✅ Tambahkan
   renderTrxSessionSelect();
   renderRekap();
   renderTransactions();
   updateTrxSessionBanner();
-  initAllCustomDD();   // ✅ Tambahkan
-  
 }
-  
 function renderSessionBar() {
   var bar = $('sessionBar');
   if (!bar) return;
@@ -2522,13 +2560,39 @@ function switchTab(tab) {
 }
 
 // ============================================================
-// LOGIN
+// LOGIN  (✅ PATCH: dari cloud users)
 // ============================================================
 function showLoginScreen() {
   $('loginScreen').classList.add('active');
   document.body.style.overflow = 'hidden';
-  USERS = loadLS('kasen_users', []) || [];
+
+  // ✅ Ambil dari cloud, fallback ke cache/localStorage
+  var cached = loadLS(CLOUD_USERS_KEY, []) || [];
+  if (cloudUsers.length > 0) {
+    USERS = cloudUsers.slice();
+  } else if (cached.length > 0) {
+    USERS = cached.slice();
+    cloudUsers = cached.slice();
+  } else {
+    USERS = loadLS('kasen_users', []) || [];
+  }
+
   showModePin();
+  updateLoginCloudInfo();
+
+  // Kalau cloud ready & user kosong, coba refresh
+  if (cloudReady && USERS.length === 0) {
+    loadCloudUsers().then(function(list) {
+      if (list.length > 0) {
+        USERS = list;
+        updateLoginCloudInfo();
+        // Kalau user sedang mengetik PIN, ulangi validasi
+        if (loginPinBuffer && loginPinBuffer.length >= 4) {
+          tryAutoLogin();
+        }
+      }
+    });
+  }
 }
 function showModePin() {
   $('modePin').style.display = 'block';
@@ -2555,22 +2619,69 @@ function pressPinDigit(d) {
 }
 function tryAutoLogin() {
   var buf = loginPinBuffer;
-  var exact = USERS.filter(function(u) { return u.pin === buf; });
-  if (exact.length === 0) { if (buf.length === 6) setTimeout(pinError, 200); return; }
-  var longer = USERS.find(function(u) { return u.pin.length > buf.length && u.pin.indexOf(buf) === 0; });
-  if (longer) { if (buf.length === 6) setTimeout(function() { doLoginSuccessFor(exact[0]); }, 150); return; }
+
+  // ✅ PATCH: pakai cloudUsers dulu, fallback ke USERS
+  var pool = (cloudUsers.length > 0) ? cloudUsers : USERS;
+
+  var exact = pool.filter(function(u) { return String(u.pin) === buf; });
+  if (exact.length === 0) {
+    // Kalau belum ketemu & cloud ready, coba load ulang sekali
+    if (buf.length === 4 && cloudReady) {
+      loadCloudUsers().then(function(list) {
+        var found = list.filter(function(u) { return String(u.pin) === buf; });
+        if (found.length > 0) {
+          USERS = list;
+          updateLoginCloudInfo();
+          doLoginSuccessFor(found[0]);
+        } else if (buf.length === 6) {
+          setTimeout(pinError, 200);
+        }
+      });
+      return;
+    }
+    if (buf.length === 6) setTimeout(pinError, 200);
+    return;
+  }
+  var longer = pool.find(function(u) {
+    return String(u.pin).length > buf.length && String(u.pin).indexOf(buf) === 0;
+  });
+  if (longer) {
+    if (buf.length === 6) setTimeout(function() { doLoginSuccessFor(exact[0]); }, 150);
+    return;
+  }
   setTimeout(function() { doLoginSuccessFor(exact[0]); }, 150);
 }
 function pinError() {
   $('pinDisplay').classList.add('shake');
-  $('loginError').textContent = USERS.length === 0 ? 'PIN tidak terdaftar' : 'PIN salah, coba lagi';
+  var info = $('loginCloudInfo');
+  var poolSize = (cloudUsers.length > 0) ? cloudUsers.length : USERS.length;
+  if (poolSize === 0) {
+    $('loginError').textContent = cloudReady ? 'PIN tidak terdaftar di cloud' : 'PIN tidak terdaftar (offline)';
+  } else {
+    $('loginError').textContent = 'PIN salah, coba lagi';
+  }
   setTimeout(function() { $('pinDisplay').classList.remove('shake'); loginPinBuffer = ''; renderPinDisplay(); }, 400);
 }
 function doLoginSuccessFor(user) {
+  // ✅ Cek device lock sebelum login
+  var lock = checkAccountDevice(user.id);
+  if (!lock.allowed) {
+    // Simulasi animasi error PIN
+    $('pinDisplay').classList.add('shake');
+    $('loginError').innerHTML =
+      '🚫 Akun <b>' + escapeHtml(user.nama) + '</b> sudah terkunci di device lain.<br>' +
+      '<span style="font-size:10px;font-weight:500;">Hubungi Leader untuk reset lock.</span>';
+    setTimeout(function() {
+      $('pinDisplay').classList.remove('shake');
+      loginPinBuffer = '';
+      renderPinDisplay();
+    }, 600);
+    return;
+  }
+
   currentUser = user;
   sessionStorage.setItem('kasen_session_uid', currentUser.id);
 
-  // ✅ Simpan flag login cepat
   var quickLoginChk = $('chkQuickLogin');
   if (quickLoginChk && quickLoginChk.checked) {
     localStorage.setItem('kasen_quick_login_uid', currentUser.id);
@@ -3329,10 +3440,8 @@ async function openPayModal() {
     var okPrint = await customConfirm('Printer belum terhubung.\nLanjut tetap bayar tanpa cetak?', 'Printer Offline', '🖨️', 'Lanjut', 'Batal', 'btn-warning');
     if (!okPrint) return;
   }
-  
   executeOpenPayModal();
 }
-
 function executeOpenPayModal() {
   var t = total();
   var bayar, kembali;
@@ -3380,7 +3489,6 @@ function executeOpenPayModal() {
   $('payModal').classList.add('active');
   $('payModal')._pendingTrx = trxPreview;
 }
-
 function updatePayPreview(trx) {
   $('strukPreview').textContent = formatStrukText(trx);
   var kembali = trx.kembali;
@@ -3434,13 +3542,11 @@ async function doBayarDanCetak() {
 function renderTokoData() {
   var grid = $('tokoFinanceGrid');
   if (!grid) return;
-
   var stats = getTodayStats();
   var totalTunai = stats.transactions.filter(function(t) { return t.paymentMode !== 'nontunai'; }).reduce(function(s, t) { return s + t.total; }, 0);
   var ses = SESSIONS.find(function(s) { return s.id === currentSessionId; });
   var modalAwal = ses ? ses.modalAwal : 0;
   var kasAkhir = modalAwal + totalTunai - stats.totalPengeluaran;
-
   grid.innerHTML = '' +
     '<div class="finance-grid">' +
       '<div class="finance-card">' +
@@ -3577,9 +3683,25 @@ async function doClosingProcess() {
   if (getTodayClosing()) { $('closingPreviewModal').classList.remove('active'); return toast('Sesi ini sudah ditutup', 'error'); }
   var btn = $('btnClosingProcess');
   btn.disabled = true; btn.textContent = 'Memproses...';
+  var closingSnapshot = JSON.parse(JSON.stringify(closingDraft));
+  CLOSINGS.unshift(closingSnapshot);
+  saveClosings();
+  if (isConnected && characteristic) {
+    try {
+      await printClosingToPrinter(closingSnapshot);
+      toast('Struk tutup toko tercetak!', 'success');
+    } catch (e) { toast('Gagal cetak: ' + e.message, 'error'); }
+  } else { toast('Tutup toko disimpan', 'success'); }
+  var closedSessionId = closingSnapshot.sessionId;
+  var ses = SESSIONS.find(function(s) { return s.id === closedSessionId; });
+  var sessionTrans = TRANSACTIONS.filter(function(t) { return t.sessionId === closedSessionId; });
+  async function doClosingProcess() {
+  if (!closingDraft) return;
+  if (getTodayClosing()) { $('closingPreviewModal').classList.remove('active'); return toast('Sesi ini sudah ditutup', 'error'); }
+  var btn = $('btnClosingProcess');
+  btn.disabled = true; btn.textContent = 'Memproses...';
 
   var closingSnapshot = JSON.parse(JSON.stringify(closingDraft));
-
   CLOSINGS.unshift(closingSnapshot);
   saveClosings();
 
@@ -3594,6 +3716,10 @@ async function doClosingProcess() {
   var ses = SESSIONS.find(function(s) { return s.id === closedSessionId; });
   var sessionTrans = TRANSACTIONS.filter(function(t) { return t.sessionId === closedSessionId; });
 
+  // ✅ AMBIL pengeluaran milik tanggal sesi ini, lalu PINDAHKAN ke arsip
+  var sesDate = closingSnapshot.tanggal;
+  var sessionExpenses = EXPENSES.filter(function(e) { return e.tanggal === sesDate; });
+
   var archivedEntry = {
     sessionId: closedSessionId,
     tanggal: closingSnapshot.tanggal,
@@ -3603,13 +3729,17 @@ async function doClosingProcess() {
     modalAwal: closingSnapshot.uangModal,
     closingId: closingSnapshot.id,
     transactions: sessionTrans,
+    expenses: sessionExpenses, // ✅ simpan pengeluaran di arsip
     closing: closingSnapshot,
     archivedAt: Date.now()
   };
   ARCHIVE_SESSIONS.unshift(archivedEntry);
   saveArchiveSessions();
-
   uploadClosingToCloud(archivedEntry, closingSnapshot);
+
+  // ✅ HAPUS pengeluaran tanggal itu dari daftar aktif
+  EXPENSES = EXPENSES.filter(function(e) { return e.tanggal !== sesDate; });
+  saveExpenses();
 
   TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.sessionId !== closedSessionId; });
   saveTransactions();
@@ -3630,7 +3760,40 @@ async function doClosingProcess() {
   renderTransactions();
   renderRekap();
   renderTokoData();
+  renderExpenses(); // ✅ refresh daftar pengeluaran
 
+  setTimeout(function() { toast('✅ Tutup toko selesai. Pengeluaran dipindah ke arsip.', 'success'); }, 700);
+  setTimeout(function() {
+    var t2 = $('startHeroTitle');
+    var s2 = $('startHeroSub');
+    if (t2) t2.textContent = 'Sesi Baru (Opsional)';
+    if (s2) s2.textContent = 'Sesi sebelumnya sudah ditutup. Mulai sesi baru kapan saja.';
+    openStartSessionModal();
+    setTimeout(function() {
+      if (t2) t2.textContent = 'Mulai Toko';
+      if (s2) s2.textContent = 'Isi jam mulai & modal awal untuk memulai sesi kasir';
+    }, 100);
+  }, 1100);
+}
+  ARCHIVE_SESSIONS.unshift(archivedEntry);
+  saveArchiveSessions();
+  uploadClosingToCloud(archivedEntry, closingSnapshot);
+  TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.sessionId !== closedSessionId; });
+  saveTransactions();
+  var closedId = closingSnapshot.id;
+  closingDraft = null;
+  $('closingPreviewModal').classList.remove('active');
+  btn.disabled = false; btn.textContent = '🔒 Proses';
+  closeCurrentSession(closedId);
+  startNewCashierSession('tutup toko ' + closedId);
+  trxSessionFilter = '__active__';
+  rekapSessionFilter = '__active__';
+  renderTrxSessionSelect();
+  renderRekapSessionSelect();
+  renderTutupToko(); renderClosingsList();
+  renderTransactions();
+  renderRekap();
+  renderTokoData();
   setTimeout(function() { toast('✅ Tutup toko selesai', 'success'); }, 700);
   setTimeout(function() {
     var t2 = $('startHeroTitle');
@@ -3696,6 +3859,8 @@ function openClosingDetail(id) {
     '<div class="detail-row"><span class="dk">Jumlah Trx</span><span class="dv">' + cl.trxCount + '</span></div>' +
     '<div class="detail-row"><span class="dk">Total Qty</span><span class="dv">' + (cl.totalQty || 0) + '</span></div>' +
     '<div style="margin:10px 0 4px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Produk Terjual</div>' +
+    '<div style="margin:10px 0 4px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">💸 Pengeluaran Sesi</div>' +
+'<div class="detail-items">' + expHtml + '</div>' +
     '<div class="detail-items">' + (produkHtml || '(kosong)') + '</div>' +
     '<div style="margin:10px 0 4px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Metode Pembayaran</div>' +
     '<div class="detail-items">' + (metodeHtml || '(kosong)') + '</div>' +
@@ -3708,6 +3873,17 @@ function openClosingDetail(id) {
     '<div class="detail-row"><span class="dk">Selisih (' + selisihLabel + ')</span><span class="dv">' + fmtRp(Math.abs(cl.selisih)) + '</span></div>' +
     (cl.catatan ? '<div class="detail-row"><span class="dk">Catatan</span><span class="dv" style="text-align:left;white-space:pre-wrap;">' + escapeHtml(cl.catatan) + '</span></div>' : '');
   $('closingDetailModal').classList.add('active');
+  // ✅ Pengeluaran sesi (dari arsip)
+var archivedSession = getArchivedSession(cl.sessionId);
+var expList = (archivedSession && archivedSession.expenses) ? archivedSession.expenses : [];
+var expHtml = '';
+if (expList.length > 0) {
+  expHtml = expList.map(function(e) {
+    return '<div class="di-row"><span>' + escapeHtml(e.keterangan || e.kategori) + '</span><span>' + fmtRp(e.jumlah) + '</span></div>';
+  }).join('');
+} else {
+  expHtml = '<div style="text-align:center;color:var(--muted);padding:6px;">Tidak ada pengeluaran</div>';
+}
 }
 
 // ============================================================
@@ -3773,7 +3949,6 @@ function renderTransactions() {
   var list = filterTransactions(all, currentTrxFilter);
   list.sort(function(a, b) { return b.timestamp - a.timestamp; });
   $('sumTrxCount').textContent = list.length;
-  // ✅ Hitung tunai & non tunai terpisah
   var sumTunai = list.filter(function(t) { return t.paymentMode !== 'nontunai'; })
     .reduce(function(s, t) { return s + t.total; }, 0);
   var sumNonTunai = list.filter(function(t) { return t.paymentMode === 'nontunai'; })
@@ -3819,11 +3994,18 @@ function renderTransactions() {
 function openTrxDetail(id) {
   var t = findTransactionById(id); if (!t) return;
   currentTrxDetailId = id;
+
+  // ✅ Highlight transaksi terpilih
+  document.querySelectorAll('.trx-row.is-selected').forEach(function(el) { el.classList.remove('is-selected'); });
+  var row = document.querySelector('.trx-row[data-id="' + id + '"]');
+  if (row) row.classList.add('is-selected');
+
   var items = t.items.map(function(i) {
-    return '<div class="di-row"><span>' + escapeHtml(i.nama) + ' x' + i.qty + '</span><span>' + fmtRp(i.subtotal) + '</span></div>';
+    return '<div class="di-row"><span>' + escapeHtml(i.nama) + ' × ' + i.qty + '</span><span>' + fmtRp(i.subtotal) + '</span></div>';
   }).join('');
   var isArchived = isSessionArchived(t.sessionId);
-  $('trxDetail').innerHTML = '' +
+
+  $('trxDetailBody').innerHTML =
     '<div class="detail-row"><span class="dk">No. Trx</span><span class="dv">' + t.id + '</span></div>' +
     '<div class="detail-row"><span class="dk">Sesi</span><span class="dv">' + escapeHtml(t.sessionId || '-') + (isArchived ? ' 📦' : '') + '</span></div>' +
     '<div class="detail-row"><span class="dk">Tanggal</span><span class="dv">' + fmtTanggal(t.timestamp) + '</span></div>' +
@@ -3831,11 +4013,49 @@ function openTrxDetail(id) {
     '<div class="detail-row"><span class="dk">Metode</span><span class="dv">' + escapeHtml(t.metode || 'Tunai') + '</span></div>' +
     (t.txMode ? '<div class="detail-row"><span class="dk">Mode</span><span class="dv">' + escapeHtml(t.txMode) + '</span></div>' : '') +
     (t.paymentMode ? '<div class="detail-row"><span class="dk">Pembayaran</span><span class="dv">' + (t.paymentMode === 'nontunai' ? '💳 Non Tunai' : '💵 Tunai') + '</span></div>' : '') +
+    '<div style="margin:10px 0 4px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">🛒 Item</div>' +
     '<div class="detail-items">' + items + '</div>' +
-    '<div class="detail-row"><span class="dk">Total</span><span class="dv">' + fmtRp(t.total) + '</span></div>' +
+    '<div class="detail-row"><span class="dk">Total</span><span class="dv" style="color:var(--success);">' + fmtRp(t.total) + '</span></div>' +
     '<div class="detail-row"><span class="dk">Bayar</span><span class="dv">' + fmtRp(t.bayar) + '</span></div>' +
-    '<div class="detail-row"><span class="dk">Kembali</span><span class="dv">' + fmtRp(t.kembali) + '</span></div>';
-  $('trxModal').classList.add('active');
+    '<div class="detail-row"><span class="dk">Kembali</span><span class="dv">' + fmtRp(t.kembali) + '</span></div>' +
+    '<div style="display:flex;gap:8px;margin-top:14px;">' +
+      '<button class="btn btn-primary" id="btnReprintInline" style="flex:1;padding:10px;">🖨️ Cetak Ulang</button>' +
+      '<button class="btn btn-danger" id="btnDeleteTrxInline" style="flex:1;padding:10px;">🗑️ Hapus</button>' +
+    '</div>';
+
+  // Bind tombol
+  var rp = $('btnReprintInline');
+  if (rp) rp.addEventListener('click', function() { reprintStruk(id); });
+  var dt = $('btnDeleteTrxInline');
+  if (dt) dt.addEventListener('click', function() { deleteTrxInline(id); });
+}
+
+// Helper hapus transaksi (dipisah dari tombol di modal lama)
+function deleteTrxInline(id) {
+  var trx = findTransactionById(id);
+  if (!trx) return;
+  var isArch = isSessionArchived(trx.sessionId);
+  var title = isArch ? 'Hapus Transaksi ARSIP?' : 'Hapus Transaksi?';
+  customConfirm('Hapus transaksi ' + trx.id + '?', title, '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
+    if (!ok) return;
+    if (isArch) {
+      var arch = getArchivedSession(trx.sessionId);
+      if (arch) {
+        arch.transactions = (arch.transactions || []).filter(function(t) { return t.id !== id; });
+        saveArchiveSessions();
+      }
+    } else {
+      TRANSACTIONS = TRANSACTIONS.filter(function(t) { return t.id !== id; });
+      saveTransactions();
+    }
+    currentTrxDetailId = null;
+    $('trxDetailBody').innerHTML = '<div class="empty" style="padding:40px 12px;">👈 Klik transaksi di sebelah kiri untuk melihat detail</div>';
+    renderTransactions();
+    renderRekap();
+    renderTutupToko();
+    renderTokoData();
+    toast('Transaksi dihapus', 'success');
+  });
 }
 function closeTrxModal() { $('trxModal').classList.remove('active'); currentTrxDetailId = null; }
 async function reprintStruk(trxId) {
@@ -4001,12 +4221,10 @@ function renderRekap() {
   list.forEach(function(t) { (t.items || []).forEach(function(it) { totalQty += it.qty; }); });
   var latestSesi = sesiRange.slice().sort(function(a, b) { return (b.timestampMulai || 0) - (a.timestampMulai || 0); })[0];
   var totalModalAwal = latestSesi ? (latestSesi.modalAwal || 0) : 0;
-  // ✅ Hitung tunai & non tunai terpisah
   var totalTunai = list.filter(function(t) { return t.paymentMode === 'tunai' || !t.paymentMode; })
     .reduce(function(s, t) { return s + t.total; }, 0);
   var totalNonTunai = list.filter(function(t) { return t.paymentMode === 'nontunai'; })
     .reduce(function(s, t) { return s + t.total; }, 0);
-  // ✅ Kas Akhir Kasir = Modal Awal + Pembayaran Tunai − Pengeluaran
   var kasAkhir = totalModalAwal + totalTunai - totalPengeluaran;
 
   var hero = $('rekapHero');
@@ -4139,7 +4357,6 @@ function renderRekap() {
   }
   html += '</div>';
 
-  // ✅ UPDATE: Semua Produk Terjual (bukan Top 10)
   var perProduk = {};
   list.forEach(function(t) {
     (t.items || []).forEach(function(it) {
@@ -4164,7 +4381,6 @@ function renderRekap() {
         '<div class="rk-info"><div class="rk-nama">' + escapeHtml(k) + '</div><div class="rk-meta">' + p.qty + ' terjual</div></div>' +
         '<div class="rk-val">' + fmtRp(p.subtotal) + '</div></div>';
     });
-    // Total Keseluruhan
     html += '<div class="rekap-row" style="background:var(--primary-soft);font-weight:800;margin-top:8px;border-radius:6px;padding:10px;">' +
       '<div class="rk-info"><div class="rk-nama" style="color:var(--primary);">TOTAL KESELURUHAN</div><div class="rk-meta">' + prodEntries.length + ' jenis produk</div></div>' +
       '<div class="rk-val" style="font-size:14px;color:var(--primary);">' + totalQtyProd + ' Qty / ' + fmtRp(totalSubProd) + '</div>' +
@@ -4209,7 +4425,6 @@ function renderRekap() {
   }
   html += '</div>';
 
-  // ✅ Ringkasan Keuangan: Modal Awal + Penjualan Kotor − Pengeluaran = Penjualan Bersih
   var penjualanBersihBaru = totalModalAwal + totalKotor - totalPengeluaran;
   html += '<div class="rekap-block"><h3>💰 Ringkasan Keuangan</h3>';
   html += '<div class="rekap-row"><div class="rk-info"><div class="rk-nama">💼 Modal Awal</div></div><div class="rk-val">' + fmtRp(totalModalAwal) + '</div></div>';
@@ -4219,7 +4434,6 @@ function renderRekap() {
   html += '</div>';
 
   content.innerHTML = financeHtml + html;
-
   renderTrenChart();
 }
 
@@ -4613,7 +4827,7 @@ function hapusExpense(id) {
   customConfirm('Hapus pengeluaran "' + (e.keterangan || e.kategori) + '"?', 'Hapus Pengeluaran', '🗑️', 'Ya, Hapus', 'Batal', 'btn-danger').then(function(ok) {
     if (!ok) return;
     EXPENSES = EXPENSES.filter(function(x) { return x.id !== id; });
-    saveExpenses(); renderExpenses(); renderTutupToko(); renderRekap(); renderTokoData(); 
+    saveExpenses(); renderExpenses(); renderTutupToko(); renderRekap(); renderTokoData();
     toast('Pengeluaran dihapus', 'success');
   });
 }
@@ -4644,7 +4858,6 @@ safeAdd('cloudIndicator', 'click', function() {
   renderCloudModal();
   $('cloudModal').classList.add('active');
 });
-
 safeAdd('btnClearCart', 'click', clearCart);
 safeAdd('btnAddProduct', 'click', function() { openProductModal(null); });
 safeAdd('btnAddCat', 'click', function() { openCatModal(null); });
@@ -4704,21 +4917,19 @@ safeAdd('menuCloudSync', 'click', function() {
 });
 safeAdd('menuSync', 'click', function() { $('settingsModal').classList.remove('active'); renderSyncInfo(); $('syncModal').classList.add('active'); });
 safeAdd('menuEditApp', 'click', function() { $('settingsModal').classList.remove('active'); openEditAppModal(); });
-  safeAdd('menuExportAppData', 'click', function() {
+safeAdd('menuExportAppData', 'click', function() {
   $('settingsModal').classList.remove('active');
   exportAppData();
 });
-
 safeAdd('menuImportAppData', 'click', function() {
   $('settingsModal').classList.remove('active');
   $('fileImportAppData').click();
 });
-
 safeAdd('fileImportAppData', 'change', function(e) {
   var file = e.target.files[0];
   if (!file) return;
   importAppData(file);
-  e.target.value = ''; // Reset input
+  e.target.value = '';
 });
 safeAdd('menuBackup', 'click', function() {
   var data = {
@@ -4734,34 +4945,52 @@ safeAdd('menuBackup', 'click', function() {
   toast('Backup diunduh', 'success');
 });
 safeAdd('menuAbout', 'click', function() {
-  customAlert(appSettings.appName + '\n\nFitur:\n+ Auto-reconnect printer\n+ Kartu tunai/non-tunai di riwayat\n+ Login cepat (tanpa PIN)\n+ Ringkasan keuangan baru\n+ ☁️ Cloud Sync (Firebase)\n+ Semua Produk Terjual\n+ Custom Modal & Dropdown\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
+  customAlert(appSettings.appName + '\n\nFitur:\n+ Auto-reconnect printer\n+ Kartu tunai/non-tunai di riwayat\n+ Login cepat (tanpa PIN)\n+ Ringkasan keuangan baru\n+ ☁️ Cloud Sync (Firebase)\n+ Semua Produk Terjual\n+ Custom Modal & Dropdown\n+ Login via akun Manager POS (Firebase)\n\nAkun: ' + (currentUser ? currentUser.nama : '-') +
     '\nRole: ' + (ROLE_LABEL[getUserRole()] || '-') +
     '\nDevice ID: ' + getDeviceId() +
-    '\nPending upload: ' + getPendingCount(), 'Tentang Aplikasi', 'ℹ️');
+    '\nPending upload: ' + getPendingCount() +
+    '\nCloud users: ' + cloudUsers.length, 'Tentang Aplikasi', 'ℹ️');
 });
-safeAdd('menuLogout', 'click', logout);
-safeAdd('menuReset', 'click', function() {
-  customConfirm('Reset SEMUA data device ini?\n\nSemua produk, transaksi, dan sesi akan hilang.', 'Peringatan Reset', '⚠️', 'Reset Data', 'Batal', 'btn-danger').then(function(ok) {
-    if (!ok) return;
-    customConfirm('Yakin? Tindakan ini tidak bisa dibatalkan.', 'Konfirmasi Akhir', '⚠️', 'Ya, Hapus Semua', 'Batal', 'btn-danger').then(function(ok2) {
-      if (!ok2) return;
-      ['toko','categories','products','transactions','expenses','closings','archive_sessions','platforms','sessions','migrated_v27','pending_uploads'].forEach(function(k) {
-        localStorage.removeItem('kasen_' + k);
-      });
-      toko = Object.assign({}, DEFAULT_TOKO);
-      PLATFORMS = JSON.parse(JSON.stringify(DEFAULT_PLATFORMS));
-      CATEGORIES = JSON.parse(JSON.stringify(DEFAULT_CATEGORIES));
-      PRODUCTS = DEFAULT_PRODUCTS.slice();
-      TRANSACTIONS = []; EXPENSES = []; CLOSINGS = []; SESSIONS = []; ARCHIVE_SESSIONS = []; cart = []; uangDibayar = 0;
-      navCatId = null; navSubId = null; currentSessionId = null;
-      rekapSessionFilter = '__active__'; trxSessionFilter = '__active__';
-      currentPlatform = PLATFORMS[0].id;
-      $('payInput').value = '';
-      $('settingsModal').classList.remove('active');
-      saveToko(); savePlatforms(); saveCats(); saveProducts(); saveTransactions(); saveExpenses(); saveClosings(); saveSessions(); saveArchiveSessions();
-      renderAll();
-      updateCloudIndicator('synced');
-      toast('Data device direset', 'success');
+safeAdd('menuResetDeviceLock', 'click', function() {
+  $('settingsModal').classList.remove('active');
+  var map = getAccountDeviceMap();
+  var myDevice = getDeviceId();
+  var entries = Object.keys(map);
+  if (entries.length === 0) {
+    return customAlert('Belum ada akun yang terkunci di device mana pun.', 'Reset Device Lock', '🔓');
+  }
+
+  var listHtml = entries.map(function(uid) {
+    var u = (cloudUsers.length > 0 ? cloudUsers : USERS).find(function(x) { return x.id === uid; });
+    var name = u ? u.nama : '(akun terhapus)';
+    var isMine = map[uid] === myDevice;
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border-radius:8px;margin-bottom:6px;">' +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-size:12px;font-weight:700;">' + escapeHtml(name) + '</div>' +
+        '<div style="font-size:10px;color:var(--muted);font-family:monospace;">' + escapeHtml(map[uid]) + '</div>' +
+      '</div>' +
+      (isMine
+        ? '<span style="font-size:10px;color:var(--success);font-weight:700;">✓ DEVICE INI</span>'
+        : '<button class="btn btn-danger btn-sm" data-reset-uid="' + escapeHtml(uid) + '">Reset</button>') +
+    '</div>';
+  }).join('');
+
+  $('customModalIcon').textContent = '🔓';
+  $('customModalTitle').textContent = 'Reset Device Lock';
+  $('customModalMsg').innerHTML = '<div style="text-align:left;max-height:50vh;overflow-y:auto;">' +
+    '<div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Klik <b>Reset</b> untuk membebaskan akun agar bisa login di device lain.</div>' +
+    listHtml + '</div>';
+  $('customModalActions').innerHTML = '<button class="btn btn-ghost" id="btnCloseDevLock" style="flex:1;">Tutup</button>';
+  $('customModal').classList.add('active');
+  $('btnCloseDevLock').onclick = function() { $('customModal').classList.remove('active'); };
+  document.querySelectorAll('[data-reset-uid]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var uid = btn.dataset.resetUid;
+      var m = getAccountDeviceMap();
+      delete m[uid];
+      saveAccountDeviceMap(m);
+      toast('Device lock dibuka. Akun bisa login di device lain.', 'success');
+      $('customModal').classList.remove('active');
     });
   });
 });
@@ -4783,7 +5012,6 @@ safeAdd('btnPasteBill', 'click', function() {
   $('billTotal').value = t.toLocaleString('id-ID');
   toast('✅ Total tagihan: ' + fmtRp(t), 'success');
 });
-
 safeAdd('btnClearHistory', 'click', function() {
   if (trxSessionFilter === '__active__') {
     if (!currentSessionId) return toast('Tidak ada sesi aktif', 'error');
@@ -4965,10 +5193,8 @@ safeAdd('billTotal', 'input', function() {
   billTotal = raw ? parseInt(raw) : 0;
   this.value = raw ? billTotal.toLocaleString('id-ID') : '';
 });
-
 safeAdd('trxSessionSelect', 'change', function() { trxSessionFilter = this.value; renderTransactions(); });
 safeAdd('rekapSessionSelect', 'change', function() { rekapSessionFilter = this.value; updateRekapDateFilterVisibility(); renderRekap(); });
-
 safeAdd('searchProduk', 'input', function() {
   searchProdukQuery = this.value.trim();
   var hasQuery = searchProdukQuery.length > 0;
@@ -5103,8 +5329,6 @@ document.querySelectorAll('.modal-bg').forEach(function(m) {
     }
   });
 });
-
-// ✅ Event Printer Settings
 safeAdd('menuPrinterSettings', 'click', function() {
   $('settingsModal').classList.remove('active');
   $('selPrinterType').value = printerConfig.type || 'Thermal';
@@ -5177,8 +5401,8 @@ function openEditAppModal() {
   $('editAppModal').classList.add('active');
 }
 
-  // ============================================================
-// EXPORT & IMPORT DATA APLIKASI (BACKUP APK SETUP)
+// ============================================================
+// EXPORT & IMPORT DATA APLIKASI
 // ============================================================
 function exportAppData() {
   try {
@@ -5190,23 +5414,19 @@ function exportAppData() {
         exportedBy: currentUser ? currentUser.nama : 'Guest',
         format: 'kasen-app-backup'
       },
-      // Semua Data Konfigurasi & Menu
       settings: appSettings,
       toko: toko,
       printerConfig: printerConfig,
       platforms: PLATFORMS,
       categories: CATEGORIES,
       products: PRODUCTS,
-      users: USERS, // Ikutkan PIN kasir agar tidak perlu setting ulang
-      // Optional: Data transaksi bisa disembunyikan atau disertakan
-      // Kita sertakan agar benar-benar full backup
+      users: USERS,
       transactions: TRANSACTIONS,
       expenses: EXPENSES,
       sessions: SESSIONS,
       archiveSessions: ARCHIVE_SESSIONS,
       closings: CLOSINGS
     };
-
     var jsonStr = JSON.stringify(exportData, null, 2);
     var blob = new Blob([jsonStr], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
@@ -5217,7 +5437,6 @@ function exportAppData() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    
     toast('Data Aplikasi berhasil disimpan!', 'success');
     log('Export app data berhasil');
   } catch (err) {
@@ -5230,21 +5449,15 @@ function importAppData(file) {
   reader.onload = function(e) {
     try {
       var data = JSON.parse(e.target.result);
-      
-      // Validasi Format
       if (!data._meta || data._meta.format !== 'kasen-app-backup') {
         throw new Error('Format file tidak valid. Pastikan file .kasen dari aplikasi ini.');
       }
-
-      // Konfirmasi Timpa Data
       customConfirm(
         '⚠️ PERINGATAN!\n\nMengupload data aplikasi akan MENGGANTI seluruh data menu, produk, setingan, dan transaksi saat ini.\n\nData saat ini akan ditimpa oleh file upload.\n\nYakin ingin melanjutkan?',
         'Konfirmasi Uplod Data',
         '📥', 'Ya, Timpa Data', 'Batal', 'btn-warning'
       ).then(function(ok) {
         if (!ok) return;
-
-        // Lakukan proses restore
         if (data.settings) { appSettings = data.settings; saveAppSettings(); }
         if (data.toko) { toko = data.toko; saveToko(); }
         if (data.printerConfig) { printerConfig = data.printerConfig; savePrinterConfig(); }
@@ -5252,26 +5465,19 @@ function importAppData(file) {
         if (data.categories) { CATEGORIES = data.categories; saveCats(); }
         if (data.products) { PRODUCTS = data.products; saveProducts(); }
         if (data.users) { USERS = data.users; saveLS('kasen_users', USERS); }
-        
         if (data.transactions) { TRANSACTIONS = data.transactions; saveTransactions(); }
         if (data.expenses) { EXPENSES = data.expenses; saveExpenses(); }
         if (data.sessions) { SESSIONS = data.sessions; saveSessions(); }
         if (data.archiveSessions) { ARCHIVE_SESSIONS = data.archiveSessions; saveArchiveSessions(); }
         if (data.closings) { CLOSINGS = data.closings; saveClosings(); }
-
-        // Terapkan Tema Baru & Reload Data
         applyTheme();
-        loadUserData(); // Reload cache dari localStorage
-        initAllCustomDD(); // Re-init dropdown custom
+        loadUserData();
+        initAllCustomDD();
         renderAll();
-        
-        // Tutup modal & Logout paksa agar setingan bersih
         $('settingsModal').classList.remove('active');
-        
         customAlert('Data aplikasi berhasil di-upload.\n\nAplikasi akan dimuat ulang untuk menerapkan perubahan.', 'Sukses', '✅').then(function(){
             location.reload();
         });
-
       });
     } catch (err) {
       customAlert('Gagal import data:\n' + err.message, 'Error', '❌');
@@ -5279,9 +5485,6 @@ function importAppData(file) {
   };
   reader.readAsText(file);
 }
-
-// ============================================================
-// PWA
 
 // ============================================================
 // PWA
@@ -5316,7 +5519,7 @@ loadGlobal();
 migrateToDeviceWide();
 applyTheme();
 updateDrawerUser();
-initAllCustomDD();   // ✅ Tambahkan baris ini
+initAllCustomDD();
 
 var dgb = $('drawerBg');
 if (dgb) { dgb.classList.remove('active'); dgb.style.display = ''; }
@@ -5327,7 +5530,7 @@ if (activeTabs.length === 0) {
   for (var i = 1; i < activeTabs.length; i++) activeTabs[i].classList.remove('active');
 }
 
-// ☁️ Init Firebase Cloud
+// ☁️ Init Firebase Cloud (sekaligus load users)
 initCloud();
 setTimeout(function() {
   if (cloudReady) flushPendingUploads();
@@ -5337,6 +5540,7 @@ window.addEventListener('online', function() {
   console.log('🌐 Online');
   cloudReady = !!db;
   updateCloudIndicator(cloudReady ? 'synced' : 'offline');
+  if (cloudReady) loadCloudUsers();
   setTimeout(flushPendingUploads, 1000);
 });
 window.addEventListener('offline', function() {
@@ -5351,7 +5555,12 @@ if (!sessionUid) {
   if (quickUid) sessionUid = quickUid;
 }
 if (sessionUid) {
+  // Cek di USERS lokal dulu, lalu di cloudUsers/cache
   var u = USERS.find(function(x) { return x.id === sessionUid; });
+  if (!u) {
+    var cu = (cloudUsers.length > 0) ? cloudUsers : (loadLS(CLOUD_USERS_KEY, []) || []);
+    u = cu.find(function(x) { return x.id === sessionUid; });
+  }
   if (u) currentUser = u;
 }
 if (currentUser) {
@@ -5360,7 +5569,6 @@ if (currentUser) {
   updatePaymentModeUI();
   applyRoleUI();
   log('Login: ' + currentUser.nama + ' (' + (ROLE_LABEL[getUserRole()] || '-') + ')');
-  // ✅ AUTO-RECONNECT: coba connect langsung + periodic retry
   setTimeout(function() { tryAutoReconnect(); }, 1000);
   setInterval(function() {
     if (!isConnected && pairedDevices.length > 0) tryAutoReconnect();
